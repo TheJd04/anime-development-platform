@@ -64,6 +64,30 @@ body {
   background-image: linear-gradient(rgba(10, 8, 5, 0.82), rgba(10, 8, 5, 0.88)), url('../assets/images/dashboards/naruto_hokage.png');
 }
 
+[data-theme="pokemon"] body {
+  background-image: linear-gradient(rgba(5, 8, 18, 0.78), rgba(5, 8, 18, 0.85)), url('../assets/images/pokedex-bg.png');
+}
+
+[data-theme="blackclover"] body {
+  background-image: linear-gradient(rgba(10, 5, 10, 0.78), rgba(10, 5, 10, 0.85)), url('../assets/images/grimoire-bg.png');
+}
+
+[data-theme="dragonball"] body {
+  background-image: linear-gradient(rgba(10, 8, 5, 0.78), rgba(10, 8, 5, 0.85)), url('../assets/images/dragonball-bg.png');
+}
+
+[data-theme="bleach"] body {
+  background-image: linear-gradient(rgba(5, 8, 18, 0.78), rgba(5, 8, 18, 0.85)), url('../assets/images/bleach-bg.png');
+}
+
+[data-theme="onepiece"] body {
+  background-image: linear-gradient(rgba(5, 8, 18, 0.78), rgba(5, 8, 18, 0.85)), url('../assets/images/onepiece-bg.png');
+}
+
+[data-theme="hunterxhunter"] body {
+  background-image: linear-gradient(rgba(5, 15, 8, 0.78), rgba(5, 15, 8, 0.85)), url('../assets/images/maps/hunterxhunter.png');
+}
+
 img, video, svg {
   display: block;
   max-width: 100%;

@@ -98,16 +98,18 @@ const Dashboard = {
     const el = document.getElementById('bracket-study');
     if (!el) return;
 
-    const todaySessions = data.study.sessions.filter(s =>
-      new Date(s.date).toDateString() === new Date().toDateString()
+    const sessions = data.study && Array.isArray(data.study.sessions) ? data.study.sessions : [];
+    const todaySessions = sessions.filter(s =>
+      s && s.date && new Date(s.date).toDateString() === new Date().toDateString()
     );
+    const todayMins = (data.study && data.study.todayMinutes) || 0;
 
     el.innerHTML = `
       <div class="bracket-header">
         <div class="bracket-title">
-          <div class="bracket-icon">${theme.bracketIcons.study}</div>
+          <div class="bracket-icon">${theme.bracketIcons ? theme.bracketIcons.study : '📚'}</div>
           <div>
-            <div class="bracket-name">${theme.bracketNames.study}</div>
+            <div class="bracket-name">${theme.bracketNames ? theme.bracketNames.study : 'Study'}</div>
             <div class="bracket-subtitle">Focus & learn</div>
           </div>
         </div>
@@ -116,7 +118,7 @@ const Dashboard = {
       <div class="bracket-body">
         <div class="bracket-stat">
           <span class="bracket-stat-label">Today</span>
-          <span class="bracket-stat-value">${data.study.todayMinutes} min</span>
+          <span class="bracket-stat-value">${todayMins} min</span>
         </div>
         <div class="bracket-stat">
           <span class="bracket-stat-label">Sessions</span>
@@ -139,17 +141,18 @@ const Dashboard = {
     const el = document.getElementById('bracket-exercise');
     if (!el) return;
 
-    const todayExercises = data.exercise.log.filter(e =>
-      new Date(e.date).toDateString() === new Date().toDateString()
+    const log = data.exercise && Array.isArray(data.exercise.log) ? data.exercise.log : [];
+    const todayExercises = log.filter(e =>
+      e && e.date && new Date(e.date).toDateString() === new Date().toDateString()
     );
     const totalMinutes = todayExercises.reduce((sum, e) => sum + (e.duration || 0), 0);
 
     el.innerHTML = `
       <div class="bracket-header">
         <div class="bracket-title">
-          <div class="bracket-icon">${theme.bracketIcons.exercise}</div>
+          <div class="bracket-icon">${theme.bracketIcons ? theme.bracketIcons.exercise : '🏋️'}</div>
           <div>
-            <div class="bracket-name">${theme.bracketNames.exercise}</div>
+            <div class="bracket-name">${theme.bracketNames ? theme.bracketNames.exercise : 'Exercise'}</div>
             <div class="bracket-subtitle">Move & strengthen</div>
           </div>
         </div>
@@ -182,8 +185,9 @@ const Dashboard = {
     const el = document.getElementById('bracket-goals');
     if (!el) return;
 
-    const completed = data.goals.yesterday.filter(g => g.completed).length;
-    const total = data.goals.yesterday.length;
+    const yesterdayList = data.goals && Array.isArray(data.goals.yesterday) ? data.goals.yesterday : [];
+    const completed = yesterdayList.filter(g => g && g.completed).length;
+    const total = yesterdayList.length;
     const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
 
     el.innerHTML = `

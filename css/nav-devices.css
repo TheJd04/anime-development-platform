@@ -2,16 +2,19 @@
    NAV DEVICES — Top-Left Floating Anime Device Navigation
    ============================================================ */
 
-/* --- Container (Bottom Center Floating for ALL themes) --- */
+/* --- Container (Bottom Center Floating when collapsed) --- */
 .nav-device-container {
-  position: fixed !important;
-  bottom: 24px !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  top: auto !important;
-  right: auto !important;
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: auto;
+  right: auto;
   z-index: 250;
   pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .nav-device-container * {
@@ -77,6 +80,9 @@
   inset: 0;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
+  transform: none;
   width: 100vw;
   height: 100vh;
   background: rgba(5, 2, 15, 0.78);
@@ -86,6 +92,7 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  pointer-events: auto;
   animation: fade-in 0.3s ease forwards;
 }
 
@@ -300,11 +307,7 @@
 
 /* --- Pokédex Trigger: Bottom-Center Pokéball-styled --- */
 .nav-device--pokedex .nav-device-trigger {
-  position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  top: auto;
+  position: relative;
   width: 56px;
   height: 56px;
   border-radius: 50%;
@@ -347,7 +350,7 @@
 }
 
 .nav-device--pokedex .nav-device-trigger:hover {
-  transform: translateX(-50%) scale(1.12);
+  transform: scale(1.12);
   box-shadow: 0 6px 30px rgba(229,57,53,0.6), 0 0 50px rgba(229,57,53,0.3);
 }
 
@@ -910,12 +913,8 @@
 
 /* --- Ninja Scroll Trigger: Bottom-Center Headband Scroll --- */
 .nav-device--scroll .nav-device-trigger {
-  position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  top: auto;
-  width: 64px;
+  position: relative;
+  width: 140px;
   height: 80px;
   border-radius: 6px;
   background: url('../../assets/images/naruto-scroll.png') center/cover no-repeat;
@@ -940,7 +939,7 @@
 }
 
 .nav-device--scroll .nav-device-trigger:hover {
-  transform: translateX(-50%) scale(1.12);
+  transform: scale(1.12);
   box-shadow: 0 0 30px rgba(245,124,0,0.7), 0 0 60px rgba(245,124,0,0.4);
 }
 
@@ -1333,11 +1332,7 @@
 
 /* --- Dragon Radar Trigger: Bottom-Center Round Radar --- */
 .nav-device--dragonradar .nav-device-trigger {
-  position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  top: auto;
+  position: relative;
   width: 64px;
   height: 64px;
   border-radius: 50%;
@@ -1380,7 +1375,7 @@
 }
 
 .nav-device--dragonradar .nav-device-trigger:hover {
-  transform: translateX(-50%) scale(1.12);
+  transform: scale(1.12);
   box-shadow: 0 0 30px rgba(0,230,118,0.7), 0 0 60px rgba(0,230,118,0.4);
 }
 

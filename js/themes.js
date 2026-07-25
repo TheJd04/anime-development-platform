@@ -1330,26 +1330,29 @@ const THEMES = {
  * Get the current rank object for a given XP total
  */
 function getCurrentRank(themeId, xp) {
-  const theme = THEMES[themeId];
-  if (!theme) return null;
+  const fallback = { name: 'Novice Warrior', xp: 0, tier: 1 };
+  const theme = THEMES[themeId] || THEMES.sololeveling;
+  if (!theme || !Array.isArray(theme.ranks) || theme.ranks.length === 0) return fallback;
+  const userXp = typeof xp === 'number' ? xp : 0;
   let current = theme.ranks[0];
   for (const rank of theme.ranks) {
-    if (xp >= rank.xp) current = rank;
+    if (userXp >= rank.xp) current = rank;
     else break;
   }
-  return current;
+  return current || fallback;
 }
 
 /**
  * Get the next rank object (or null if at max)
  */
 function getNextRank(themeId, xp) {
-  const theme = THEMES[themeId];
-  if (!theme) return null;
+  const theme = THEMES[themeId] || THEMES.sololeveling;
+  if (!theme || !Array.isArray(theme.ranks)) return null;
+  const userXp = typeof xp === 'number' ? xp : 0;
   for (const rank of theme.ranks) {
-    if (xp < rank.xp) return rank;
+    if (userXp < rank.xp) return rank;
   }
-  return null; // at max
+  return null;
 }
 
 /**
@@ -1358,10 +1361,12 @@ function getNextRank(themeId, xp) {
 function getRankProgress(themeId, xp) {
   const current = getCurrentRank(themeId, xp);
   const next = getNextRank(themeId, xp);
-  if (!next) return 100;
+  if (!next || !current) return 100;
+  const userXp = typeof xp === 'number' ? xp : 0;
   const range = next.xp - current.xp;
-  const progress = xp - current.xp;
-  return Math.min(100, Math.round((progress / range) * 100));
+  if (range <= 0) return 100;
+  const progress = userXp - current.xp;
+  return Math.min(100, Math.max(0, Math.round((progress / range) * 100)));
 }
 
 /**
@@ -1371,7 +1376,7 @@ function getRankTierClass(themeId, xp) {
   const rank = getCurrentRank(themeId, xp);
   if (!rank) return 'rank-1';
   if (rank.tier === 'max') return 'rank-max';
-  return `rank-${rank.tier}`;
+  return `rank-${rank.tier || 1}`;
 }
 
 /**

@@ -1,0 +1,354 @@
+/* ============================================================
+   BASE STYLES — Reset, Typography, Layout, Glass Cards
+   ============================================================ */
+
+/* --- Reset --- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
+  background-color: var(--bg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-image 0.5s ease;
+}
+
+/* Theme Fullscreen Background Wallpapers */
+[data-theme="blackclover"] body {
+  background-image: linear-gradient(rgba(5, 2, 10, 0.82), rgba(5, 2, 10, 0.88)), url('../assets/images/grimoire-bg.png');
+}
+
+[data-theme="bleach"] body {
+  background-image: linear-gradient(rgba(5, 2, 10, 0.82), rgba(5, 2, 10, 0.88)), url('../assets/images/bleach-bg.png');
+}
+
+[data-theme="pokemon"] body {
+  background-image: linear-gradient(rgba(5, 5, 15, 0.82), rgba(5, 5, 15, 0.86)), url('../assets/images/pokedex-bg.png');
+}
+
+[data-theme="dragonball"] body {
+  background-image: linear-gradient(rgba(6, 6, 12, 0.82), rgba(6, 6, 12, 0.88)), url('../assets/images/dragonball-bg.png');
+}
+
+[data-theme="sololeveling"] body {
+  background-image: linear-gradient(rgba(5, 8, 18, 0.82), rgba(5, 8, 18, 0.88)), url('../assets/images/sololeveling-bg.png');
+}
+
+[data-theme="demonslayer"] body {
+  background-image: linear-gradient(rgba(10, 5, 15, 0.82), rgba(10, 5, 15, 0.88)), url('../assets/images/demonslayer-bg.png');
+}
+
+[data-theme="wandandsword"] body {
+  background-image: linear-gradient(rgba(6, 9, 20, 0.82), rgba(6, 9, 20, 0.88)), url('../assets/images/wandandsword-bg.png');
+}
+
+[data-theme="naruto"] body {
+  background-image: linear-gradient(rgba(10, 8, 5, 0.82), rgba(10, 8, 5, 0.88)), url('../assets/images/dashboards/naruto_hokage.png');
+}
+
+img, video, svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--primary-light);
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+/* --- Scrollbar --- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-dark);
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  color: var(--text);
+}
+
+h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
+h3 { font-size: clamp(1.15rem, 2.5vw, 1.5rem); }
+h4 { font-size: clamp(1rem, 2vw, 1.2rem); }
+
+p {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.text-glow {
+  text-shadow: 0 0 20px var(--glow), 0 0 40px var(--glow);
+}
+
+.text-gradient {
+  background: var(--gradient-rank);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-sm { font-size: 0.85rem; }
+.text-xs { font-size: 0.75rem; }
+.text-lg { font-size: 1.15rem; }
+.text-xl { font-size: 1.35rem; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+.font-heading { font-family: var(--font-heading); }
+.font-mono { font-family: var(--font-mono); }
+
+/* --- Layout Utilities --- */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.items-center { align-items: center; }
+.items-start { align-items: flex-start; }
+.items-end { align-items: flex-end; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-end { justify-content: flex-end; }
+.gap-xs { gap: 6px; }
+.gap-sm { gap: 10px; }
+.gap-md { gap: 16px; }
+.gap-lg { gap: 24px; }
+.gap-xl { gap: 36px; }
+
+.grid {
+  display: grid;
+}
+
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 1024px) {
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .container { padding: 0 16px; }
+}
+
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+.relative { position: relative; }
+.absolute { position: absolute; }
+.overflow-hidden { overflow: hidden; }
+
+.mt-sm { margin-top: 10px; }
+.mt-md { margin-top: 16px; }
+.mt-lg { margin-top: 24px; }
+.mt-xl { margin-top: 36px; }
+.mb-sm { margin-bottom: 10px; }
+.mb-md { margin-bottom: 16px; }
+.mb-lg { margin-bottom: 24px; }
+
+.p-sm { padding: 10px; }
+.p-md { padding: 16px; }
+.p-lg { padding: 24px; }
+
+.hidden { display: none !important; }
+.visible { display: block; }
+
+/* --- Glass Morphism Cards --- */
+.card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-card);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.card-glow {
+  box-shadow: var(--shadow-glow);
+}
+
+.card-glow:hover {
+  box-shadow: 0 0 50px var(--glow), var(--shadow-md);
+}
+
+.card-solid {
+  background: var(--surface);
+  backdrop-filter: none;
+}
+
+.card-flat {
+  background: var(--surface-light);
+  border: 1px solid rgba(255,255,255,0.05);
+  backdrop-filter: none;
+}
+
+.card-flat::before {
+  display: none;
+}
+
+/* --- Animated Background --- */
+.bg-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bg-particles .particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--primary);
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: float-particle 12s infinite ease-in-out;
+}
+
+.bg-particles .particle:nth-child(odd) {
+  background: var(--secondary);
+  animation-duration: 16s;
+}
+
+.bg-particles .particle:nth-child(3n) {
+  width: 2px;
+  height: 2px;
+  opacity: 0.15;
+  animation-duration: 20s;
+}
+
+@keyframes float-particle {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+  25% { transform: translate(30px, -60px) scale(1.2); opacity: 0.5; }
+  50% { transform: translate(-20px, -120px) scale(0.8); opacity: 0.2; }
+  75% { transform: translate(40px, -60px) scale(1.1); opacity: 0.4; }
+}
+
+/* --- Section Divider --- */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
+  margin: 24px 0;
+}
+
+/* --- Screen wrapper --- */
+.screen {
+  display: none;
+  min-height: 100vh;
+  padding-top: var(--nav-height);
+  position: relative;
+  z-index: 1;
+}
+
+.screen.active {
+  display: block;
+  animation: screen-in 0.4s ease forwards;
+}
+
+@keyframes screen-in {
+  from { opacity: 0; transform: translateY(15px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --- App wrapper --- */
+#app {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}

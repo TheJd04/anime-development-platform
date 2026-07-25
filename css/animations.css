@@ -1,0 +1,465 @@
+/* ============================================================
+   ANIMATIONS — Transitions, particles, glow, card flips
+   ============================================================ */
+
+/* ── Screen Transitions ─────────────────────── */
+@keyframes screen-in {
+  from { opacity: 0; transform: translateY(15px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes screen-out {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-15px); }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(-30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Power Up / Rank Up ─────────────────────── */
+@keyframes power-up {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0px var(--glow);
+  }
+  30% {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px var(--glow), 0 0 80px var(--glow);
+  }
+  60% {
+    transform: scale(0.97);
+    box-shadow: 0 0 20px var(--glow);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0px var(--glow);
+  }
+}
+
+@keyframes rank-up-flash {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.rank-up-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--glow);
+  z-index: 500;
+  pointer-events: none;
+  animation: rank-up-flash 1.2s ease forwards;
+}
+
+.power-up-effect {
+  animation: power-up 0.8s ease;
+}
+
+/* ── Glow Pulse ─────────────────────────────── */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 10px var(--glow); }
+  50% { box-shadow: 0 0 30px var(--glow), 0 0 60px var(--glow); }
+}
+
+@keyframes glow-pulse-text {
+  0%, 100% { text-shadow: 0 0 10px var(--glow); }
+  50% { text-shadow: 0 0 25px var(--glow), 0 0 50px var(--glow); }
+}
+
+.animate-glow {
+  animation: glow-pulse 3s ease infinite;
+}
+
+.animate-glow-text {
+  animation: glow-pulse-text 3s ease infinite;
+}
+
+/* ── Card Flip (Collection) ─────────────────── */
+.flip-container {
+  perspective: 800px;
+}
+
+.flip-card {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.flip-card.flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-front, .flip-back {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.flip-back {
+  transform: rotateY(180deg);
+}
+
+/* ── Floating Animation ─────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-5px) rotate(1deg); }
+  75% { transform: translateY(3px) rotate(-1deg); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+/* ── Stagger Children Animation ─────────────── */
+.stagger-children > * {
+  opacity: 0;
+  animation: slide-up 0.5s ease forwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.25s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(7) { animation-delay: 0.35s; }
+.stagger-children > *:nth-child(8) { animation-delay: 0.4s; }
+.stagger-children > *:nth-child(9) { animation-delay: 0.45s; }
+.stagger-children > *:nth-child(10) { animation-delay: 0.5s; }
+
+/* ── XP Gain Animation ──────────────────────── */
+@keyframes xp-pop {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  50% { transform: translateY(-30px) scale(1.3); }
+  100% { opacity: 0; transform: translateY(-60px) scale(0.8); }
+}
+
+.xp-popup {
+  position: fixed;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--accent);
+  text-shadow: 0 0 15px var(--glow);
+  pointer-events: none;
+  z-index: 400;
+  animation: xp-pop 1s ease forwards;
+}
+
+/* ── Particle System (CSS-only) ─────────────── */
+@keyframes particle-drift-1 {
+  0%   { transform: translate(0, 0) scale(0); opacity: 0; }
+  10%  { opacity: 0.6; transform: scale(1); }
+  90%  { opacity: 0.1; }
+  100% { transform: translate(80px, -300px) scale(0.3); opacity: 0; }
+}
+
+@keyframes particle-drift-2 {
+  0%   { transform: translate(0, 0) scale(0); opacity: 0; }
+  10%  { opacity: 0.4; transform: scale(1); }
+  90%  { opacity: 0.05; }
+  100% { transform: translate(-60px, -250px) scale(0.5); opacity: 0; }
+}
+
+@keyframes particle-drift-3 {
+  0%   { transform: translate(0, 0) scale(0); opacity: 0; }
+  10%  { opacity: 0.5; transform: scale(1); }
+  90%  { opacity: 0.08; }
+  100% { transform: translate(40px, -350px) scale(0.2); opacity: 0; }
+}
+
+/* ── Energy Aura (behind profile/rank card) ─── */
+@keyframes aura-rotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.aura {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120%;
+  height: 120%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent,
+    var(--glow),
+    transparent,
+    var(--glow-secondary),
+    transparent
+  );
+  filter: blur(30px);
+  opacity: 0.3;
+  animation: aura-rotate 8s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Shake (error) ──────────────────────────── */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
+}
+
+.animate-shake {
+  animation: shake 0.4s ease;
+}
+
+/* ── Breathing glow for onboarding ──────────── */
+@keyframes breathe {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.05); }
+}
+
+.onboarding-bg-glow {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+  filter: blur(80px);
+  animation: breathe 5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.onboarding-bg-glow.glow-1 {
+  top: -100px;
+  left: -100px;
+}
+
+.onboarding-bg-glow.glow-2 {
+  bottom: -150px;
+  right: -100px;
+  animation-delay: 2.5s;
+  background: radial-gradient(circle, var(--glow-secondary) 0%, transparent 70%);
+}
+
+/* ── Creature Capture Animation ─────────────── */
+@keyframes capture-spin {
+  0%   { transform: rotate(0deg) scale(1); }
+  25%  { transform: rotate(90deg) scale(0.8); }
+  50%  { transform: rotate(180deg) scale(0.6); }
+  75%  { transform: rotate(270deg) scale(0.8); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes capture-success {
+  0%   { transform: scale(0.5); opacity: 0; }
+  50%  { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.capture-animation {
+  animation: capture-spin 1s ease, capture-success 0.5s ease 1s forwards;
+}
+
+/* ── Number Count Up (for stats) ────────────── */
+@keyframes count-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+.count-up {
+  animation: count-pop 0.3s ease;
+}
+
+/* ── Device Animations ──────────────────────── */
+@keyframes device-unroll {
+  0% { transform: scaleY(0.1) scaleX(0.8); opacity: 0; }
+  60% { transform: scaleY(1.05) scaleX(1); opacity: 1; }
+  100% { transform: scaleY(1) scaleX(1); opacity: 1; }
+}
+
+@keyframes device-flip-open {
+  0% { transform: perspective(600px) rotateY(-90deg) scale(0.7); opacity: 0; }
+  70% { transform: perspective(600px) rotateY(10deg) scale(1.02); opacity: 1; }
+  100% { transform: perspective(600px) rotateY(0deg) scale(1); opacity: 1; }
+}
+
+@keyframes device-glitch-in {
+  0% { transform: scale(0.8) translateY(-10px); opacity: 0; filter: blur(4px); }
+  30% { transform: scale(1.04) translateY(2px); opacity: 0.8; filter: blur(0); }
+  60% { transform: scale(0.98); opacity: 1; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* ── Grimoire Book Animations ──────────────── */
+@keyframes grimoire-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-6px) rotate(0.5deg); }
+  50% { transform: translateY(-10px) rotate(0deg); }
+  75% { transform: translateY(-6px) rotate(-0.5deg); }
+}
+
+@keyframes grimoire-aura {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(198,40,40,0.4), 0 0 40px rgba(198,40,40,0.2), 0 0 60px rgba(198,40,40,0.1);
+    filter: brightness(1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(198,40,40,0.6), 0 0 60px rgba(198,40,40,0.35), 0 0 90px rgba(198,40,40,0.15);
+    filter: brightness(1.1);
+  }
+}
+
+@keyframes grimoire-book-open {
+  0% {
+    transform: perspective(1200px) rotateY(0deg) scale(0.3);
+    opacity: 0;
+  }
+  30% {
+    transform: perspective(1200px) rotateY(-10deg) scale(0.8);
+    opacity: 1;
+  }
+  60% {
+    transform: perspective(1200px) rotateY(5deg) scale(1.02);
+  }
+  100% {
+    transform: perspective(1200px) rotateY(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes grimoire-page-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes grimoire-rune-glow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes grimoire-close {
+  0% {
+    transform: perspective(1200px) rotateY(0deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: perspective(1200px) rotateY(20deg) scale(0.3);
+    opacity: 0;
+  }
+}
+
+/* ── Pokédex Device Animations ─────────────── */
+@keyframes pokedex-flip-open {
+  0% {
+    transform: perspective(1000px) rotateY(-90deg) scale(0.6);
+    opacity: 0;
+  }
+  50% {
+    transform: perspective(1000px) rotateY(10deg) scale(1.02);
+    opacity: 1;
+  }
+  75% {
+    transform: perspective(1000px) rotateY(-3deg) scale(1);
+  }
+  100% {
+    transform: perspective(1000px) rotateY(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pokedex-lens-blink {
+  0%, 70%, 100% {
+    box-shadow: 0 0 8px #00E5FF, inset 0 0 4px rgba(0,229,255,0.3);
+  }
+  75%, 95% {
+    box-shadow: 0 0 20px #00E5FF, 0 0 40px rgba(0,229,255,0.4), inset 0 0 8px rgba(0,229,255,0.5);
+  }
+}
+
+@keyframes pokedex-scan-line {
+  0% { top: 0; }
+  100% { top: 100%; }
+}
+
+@keyframes pokedex-screen-on {
+  0% { opacity: 0; filter: brightness(0); }
+  40% { opacity: 0.5; filter: brightness(1.5); }
+  100% { opacity: 1; filter: brightness(1); }
+}
+
+@keyframes pokedex-btn-pulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* ── Ninja Scroll Animations ───────────────── */
+@keyframes scroll-unroll-open {
+  0% {
+    transform: scaleX(0.05) scaleY(0.9);
+    opacity: 0;
+  }
+  60% {
+    transform: scaleX(1.04) scaleY(1);
+    opacity: 1;
+  }
+  85% {
+    transform: scaleX(0.98) scaleY(1);
+  }
+  100% {
+    transform: scaleX(1) scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes scroll-seal-pulse {
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(255,145,0,0.4)); }
+  50% { filter: drop-shadow(0 0 12px rgba(255,145,0,0.8)); }
+}
+
+/* ── Reduced Motion ─────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+

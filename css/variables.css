@@ -1,0 +1,363 @@
+/* ============================================================
+   THEME VARIABLES — 6 Anime Universes
+   Each theme sets colors, glows, and gradients via CSS custom props.
+   Applied to <html> via data-theme attribute.
+   ============================================================ */
+
+:root {
+  /* Shared layout tokens */
+  --nav-height: 64px;
+  --sidebar-width: 260px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.18);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.25);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,0.35);
+  --shadow-glow: 0 0 30px var(--glow);
+  --transition-fast: 0.18s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  --font-heading: 'Orbitron', sans-serif;
+  --font-body: 'Rajdhani', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Glass morphism tokens */
+  --glass-bg: rgba(255,255,255,0.05);
+  --glass-border: rgba(255,255,255,0.1);
+  --glass-blur: 16px;
+}
+
+/* ──────────────────────────────────────────────
+   1. DRAGON BALL — Orange / Blue Energy
+   ────────────────────────────────────────────── */
+[data-theme="dragonball"] {
+  --primary: #FF6B00;
+  --primary-light: #FF9A40;
+  --primary-dark: #CC5500;
+  --secondary: #2196F3;
+  --secondary-light: #64B5F6;
+  --accent: #FFD600;
+  --accent-alt: #FF3D00;
+  --bg: #0A0A14;
+  --bg-secondary: #111128;
+  --surface: #1A1A35;
+  --surface-light: #252550;
+  --text: #F0EAE0;
+  --text-muted: #9A8F80;
+  --text-dim: #6B6050;
+  --glow: rgba(255,107,0,0.5);
+  --glow-secondary: rgba(33,150,243,0.4);
+  --gradient-hero: linear-gradient(135deg, #FF6B00 0%, #FF3D00 40%, #2196F3 100%);
+  --gradient-card: linear-gradient(160deg, rgba(255,107,0,0.12) 0%, rgba(33,150,243,0.08) 100%);
+  --gradient-rank: linear-gradient(90deg, #FF6B00, #FFD600);
+
+  /* Rank tier colors */
+  --rank-1: #8BC34A;
+  --rank-2: #FFEB3B;
+  --rank-3: #FF9800;
+  --rank-4: #F44336;
+  --rank-5: #E040FB;
+  --rank-6: #00E5FF;
+  --rank-max: #FFD700;
+}
+
+/* ──────────────────────────────────────────────
+   2. NARUTO — Orange / Black with Red Accents
+   ────────────────────────────────────────────── */
+[data-theme="naruto"] {
+  --primary: #F57C00;
+  --primary-light: #FFB74D;
+  --primary-dark: #E65100;
+  --secondary: #D32F2F;
+  --secondary-light: #EF5350;
+  --accent: #FFC107;
+  --accent-alt: #1B5E20;
+  --bg: #0D0D0D;
+  --bg-secondary: #1A1208;
+  --surface: #1E1810;
+  --surface-light: #2D2518;
+  --text: #F5E6D0;
+  --text-muted: #A09080;
+  --text-dim: #706050;
+  --glow: rgba(245,124,0,0.5);
+  --glow-secondary: rgba(211,47,47,0.4);
+  --gradient-hero: linear-gradient(135deg, #F57C00 0%, #D32F2F 50%, #1B5E20 100%);
+  --gradient-card: linear-gradient(160deg, rgba(245,124,0,0.12) 0%, rgba(211,47,47,0.06) 100%);
+  --gradient-rank: linear-gradient(90deg, #F57C00, #D32F2F);
+
+  --rank-1: #66BB6A;
+  --rank-2: #FFA726;
+  --rank-3: #EF5350;
+  --rank-4: #AB47BC;
+  --rank-5: #42A5F5;
+  --rank-6: #FFD600;
+  --rank-max: #FF1744;
+}
+
+/* ──────────────────────────────────────────────
+   3. BLEACH — Black / White with Teal Glow
+   ────────────────────────────────────────────── */
+[data-theme="bleach"] {
+  --primary: #00BCD4;
+  --primary-light: #4DD0E1;
+  --primary-dark: #00838F;
+  --secondary: #F5F5F5;
+  --secondary-light: #FFFFFF;
+  --accent: #7C4DFF;
+  --accent-alt: #FF1744;
+  --bg: #050508;
+  --bg-secondary: #0A0A12;
+  --surface: #121218;
+  --surface-light: #1E1E28;
+  --text: #E8E8F0;
+  --text-muted: #8888A0;
+  --text-dim: #555570;
+  --glow: rgba(0,188,212,0.5);
+  --glow-secondary: rgba(124,77,255,0.4);
+  --gradient-hero: linear-gradient(135deg, #00BCD4 0%, #7C4DFF 50%, #050508 100%);
+  --gradient-card: linear-gradient(160deg, rgba(0,188,212,0.1) 0%, rgba(124,77,255,0.06) 100%);
+  --gradient-rank: linear-gradient(90deg, #00BCD4, #7C4DFF);
+
+  --rank-1: #78909C;
+  --rank-2: #4DD0E1;
+  --rank-3: #7C4DFF;
+  --rank-4: #FF1744;
+  --rank-5: #FFD600;
+  --rank-6: #F5F5F5;
+  --rank-max: #00E5FF;
+}
+
+/* ──────────────────────────────────────────────
+   4. SOLO LEVELING — Purple / Blue Neon System UI
+   ────────────────────────────────────────────── */
+[data-theme="sololeveling"] {
+  --primary: #7B1FA2;
+  --primary-light: #AB47BC;
+  --primary-dark: #4A148C;
+  --secondary: #304FFE;
+  --secondary-light: #536DFE;
+  --accent: #00E5FF;
+  --accent-alt: #FF1744;
+  --bg: #05050F;
+  --bg-secondary: #0A0A1E;
+  --surface: #10102A;
+  --surface-light: #1A1A3F;
+  --text: #D0D0F0;
+  --text-muted: #7070A0;
+  --text-dim: #4A4A70;
+  --glow: rgba(123,31,162,0.6);
+  --glow-secondary: rgba(48,79,254,0.5);
+  --gradient-hero: linear-gradient(135deg, #7B1FA2 0%, #304FFE 50%, #00E5FF 100%);
+  --gradient-card: linear-gradient(160deg, rgba(123,31,162,0.15) 0%, rgba(48,79,254,0.08) 100%);
+  --gradient-rank: linear-gradient(90deg, #7B1FA2, #00E5FF);
+
+  --rank-1: #66BB6A;
+  --rank-2: #42A5F5;
+  --rank-3: #AB47BC;
+  --rank-4: #FF7043;
+  --rank-5: #FFD600;
+  --rank-6: #00E5FF;
+  --rank-max: #E040FB;
+}
+
+/* ──────────────────────────────────────────────
+   5. HUNTER x HUNTER — Green / Gold, Dark Forest
+   ────────────────────────────────────────────── */
+[data-theme="hunterxhunter"] {
+  --primary: #4CAF50;
+  --primary-light: #81C784;
+  --primary-dark: #2E7D32;
+  --secondary: #FFB300;
+  --secondary-light: #FFD54F;
+  --accent: #FF5252;
+  --accent-alt: #00B0FF;
+  --bg: #060D06;
+  --bg-secondary: #0D180D;
+  --surface: #142014;
+  --surface-light: #1E301E;
+  --text: #D8E8D0;
+  --text-muted: #80A078;
+  --text-dim: #506848;
+  --glow: rgba(76,175,80,0.5);
+  --glow-secondary: rgba(255,179,0,0.4);
+  --gradient-hero: linear-gradient(135deg, #4CAF50 0%, #FFB300 50%, #FF5252 100%);
+  --gradient-card: linear-gradient(160deg, rgba(76,175,80,0.12) 0%, rgba(255,179,0,0.06) 100%);
+  --gradient-rank: linear-gradient(90deg, #4CAF50, #FFB300);
+
+  --rank-1: #8BC34A;
+  --rank-2: #FFEB3B;
+  --rank-3: #FF9800;
+  --rank-4: #F44336;
+  --rank-5: #E040FB;
+  --rank-6: #FFD700;
+  --rank-max: #76FF03;
+}
+
+/* ──────────────────────────────────────────────
+   6. POKÉMON — Red / White, Bright & Cheerful
+   ────────────────────────────────────────────── */
+[data-theme="pokemon"] {
+  --primary: #E53935;
+  --primary-light: #EF5350;
+  --primary-dark: #C62828;
+  --secondary: #F5F5F5;
+  --secondary-light: #FFFFFF;
+  --accent: #FFD600;
+  --accent-alt: #2196F3;
+  --bg: #0A0A18;
+  --bg-secondary: #12121F;
+  --surface: #1A1A2E;
+  --surface-light: #252542;
+  --text: #F0E8E8;
+  --text-muted: #A09090;
+  --text-dim: #706060;
+  --glow: rgba(229,57,53,0.5);
+  --glow-secondary: rgba(255,214,0,0.4);
+  --gradient-hero: linear-gradient(135deg, #E53935 0%, #FFD600 50%, #2196F3 100%);
+  --gradient-card: linear-gradient(160deg, rgba(229,57,53,0.12) 0%, rgba(255,214,0,0.06) 100%);
+  --gradient-rank: linear-gradient(90deg, #E53935, #FFD600);
+
+  --rank-1: #66BB6A;
+  --rank-2: #42A5F5;
+  --rank-3: #FFA726;
+  --rank-4: #EF5350;
+  --rank-5: #AB47BC;
+  --rank-6: #FFD600;
+  --rank-max: #FF1744;
+}
+
+/* ──────────────────────────────────────────────
+   7. DEMON SLAYER — Deep Green / Charcoal Black / Crimson & Wisteria Purple
+   ────────────────────────────────────────────── */
+[data-theme="demonslayer"] {
+  --primary: #2E7D32;
+  --primary-light: #66BB6A;
+  --primary-dark: #1B5E20;
+  --secondary: #9C27B0;
+  --secondary-light: #BA68C8;
+  --accent: #FF1744;
+  --accent-alt: #FFD600;
+  --bg: #080A08;
+  --bg-secondary: #101410;
+  --surface: #161C16;
+  --surface-light: #222C22;
+  --text: #F0F4F0;
+  --text-muted: #8AA08A;
+  --text-dim: #556655;
+  --glow: rgba(46,125,50,0.6);
+  --glow-secondary: rgba(156,39,176,0.5);
+  --gradient-hero: linear-gradient(135deg, #2E7D32 0%, #9C27B0 50%, #FF1744 100%);
+  --gradient-card: linear-gradient(160deg, rgba(46,125,50,0.15) 0%, rgba(156,39,176,0.08) 100%);
+  --gradient-rank: linear-gradient(90deg, #2E7D32, #9C27B0);
+
+  --rank-1: #81C784;
+  --rank-2: #4DD0E1;
+  --rank-3: #BA68C8;
+  --rank-4: #FF8A65;
+  --rank-5: #FFD54F;
+  --rank-6: #FF1744;
+  --rank-max: #E040FB;
+}
+
+/* ──────────────────────────────────────────────
+   8. WAND AND SWORD — Royal Navy / Luminous Gold / Mystic Cyan & Spell Violet
+   ────────────────────────────────────────────── */
+[data-theme="wandandsword"] {
+  --primary: #00E5FF;
+  --primary-light: #80D8FF;
+  --primary-dark: #0097A7;
+  --secondary: #FFD700;
+  --secondary-light: #FFE57F;
+  --accent: #E040FB;
+  --accent-alt: #7C4DFF;
+  --bg: #060914;
+  --bg-secondary: #0D1226;
+  --surface: #141C38;
+  --surface-light: #1E2A52;
+  --text: #F0F4FF;
+  --text-muted: #8AA0D0;
+  --text-dim: #556690;
+  --glow: rgba(0,229,255,0.6);
+  --glow-secondary: rgba(255,215,0,0.5);
+  --gradient-hero: linear-gradient(135deg, #00E5FF 0%, #7C4DFF 50%, #FFD700 100%);
+  --gradient-card: linear-gradient(160deg, rgba(0,229,255,0.15) 0%, rgba(124,77,255,0.08) 100%);
+  --gradient-rank: linear-gradient(90deg, #00E5FF, #FFD700);
+
+  --rank-1: #80D8FF;
+  --rank-2: #4DD0E1;
+  --rank-3: #7C4DFF;
+  --rank-4: #BA68C8;
+  --rank-5: #FFD54F;
+  --rank-6: #00E5FF;
+  --rank-max: #FFD700;
+}
+
+/* ──────────────────────────────────────────────
+   9. BLACK CLOVER — Deep Black / Crimson Red / Gold / Dark Green
+   ────────────────────────────────────────────── */
+[data-theme="blackclover"] {
+  --primary: #C62828;
+  --primary-light: #EF5350;
+  --primary-dark: #8E0000;
+  --secondary: #1B5E20;
+  --secondary-light: #4CAF50;
+  --accent: #FFD700;
+  --accent-alt: #9C27B0;
+  --bg: #06060A;
+  --bg-secondary: #0D0D14;
+  --surface: #141418;
+  --surface-light: #1E1E24;
+  --text: #E8E0D4;
+  --text-muted: #9A8E7E;
+  --text-dim: #5C5448;
+  --glow: rgba(198,40,40,0.6);
+  --glow-secondary: rgba(27,94,32,0.5);
+  --gradient-hero: linear-gradient(135deg, #C62828 0%, #1B5E20 50%, #FFD700 100%);
+  --gradient-card: linear-gradient(160deg, rgba(198,40,40,0.15) 0%, rgba(27,94,32,0.08) 100%);
+  --gradient-rank: linear-gradient(90deg, #C62828, #FFD700);
+
+  --rank-1: #66BB6A;
+  --rank-2: #4CAF50;
+  --rank-3: #FF7043;
+  --rank-4: #EF5350;
+  --rank-5: #AB47BC;
+  --rank-6: #FFD700;
+  --rank-max: #C62828;
+}
+
+/* ──────────────────────────────────────────────
+   10. ONE PIECE — Pirate Crimson / Ocean Navy / Gold
+   ────────────────────────────────────────────── */
+[data-theme="onepiece"] {
+  --primary: #D32F2F;
+  --primary-light: #FF5252;
+  --primary-dark: #8E0000;
+  --secondary: #0288D1;
+  --secondary-light: #03A9F4;
+  --accent: #FFD700;
+  --accent-alt: #FF9800;
+  --bg: #050B14;
+  --bg-secondary: #0A1424;
+  --surface: #101F38;
+  --surface-light: #1A2E50;
+  --text: #F5F7FA;
+  --text-muted: #90A4AE;
+  --text-dim: #546E7A;
+  --glow: rgba(211,47,47,0.6);
+  --glow-secondary: rgba(2,136,209,0.5);
+  --gradient-hero: linear-gradient(135deg, #D32F2F 0%, #0288D1 50%, #FFD700 100%);
+  --gradient-card: linear-gradient(160deg, rgba(211,47,47,0.15) 0%, rgba(2,136,209,0.08) 100%);
+  --gradient-rank: linear-gradient(90deg, #D32F2F, #FFD700);
+
+  --rank-1: #4FC3F7;
+  --rank-2: #29B6F6;
+  --rank-3: #FFB74D;
+  --rank-4: #FF7043;
+  --rank-5: #FFD54F;
+  --rank-6: #EF5350;
+  --rank-max: #FFD700;
+}
+
+

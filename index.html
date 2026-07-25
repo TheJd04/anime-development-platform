@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="sololeveling">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Level Up — Anime Personal Development Platform</title>
+  <meta name="description" content="An anime-themed personal development platform. Track study, exercise, goals, write diary entries, compete, and collect creatures — powered by your favorite anime universe." />
+  <meta name="theme-color" content="#7B1FA2" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/screens.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/nav-devices.css" />
+  <link rel="stylesheet" href="css/map.css" />
+  <link rel="stylesheet" href="css/health.css" />
+  <link rel="stylesheet" href="css/spells.css" />
+</head>
+<body>
+  <!-- Background Particles -->
+  <div class="bg-particles" id="bg-particles"></div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Modal Overlay -->
+  <div class="modal-overlay" id="modal-overlay"></div>
+
+  <!-- Center Panel Overlay (Pokédex, Collection, Region Picker) -->
+  <div class="center-panel-overlay" id="center-panel-overlay"></div>
+
+  <!-- Audio Control Overlay Widget (Top Right) -->
+  <div class="audio-widget-container" id="audio-widget-container">
+    <button class="audio-btn" id="audio-mute-btn" title="Toggle Music">🔊</button>
+    <input type="range" class="audio-slider" id="audio-volume-slider" min="0" max="1" step="0.05" value="0.5" title="Volume Slider" />
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       FLOATING ANIMATED NAVIGATION DEVICE
+       ═══════════════════════════════════════════ -->
+  <div id="nav-device-container" class="nav-device-container hidden"></div>
+
+
+
+  <!-- ═══════════════════════════════════════════
+       APP CONTAINER
+       ═══════════════════════════════════════════ -->
+  <div id="app">
+
+    <!-- ─── Onboarding Screen ──────────────── -->
+    <div class="screen screen-onboarding" id="screen-onboarding">
+      <div class="onboarding-bg-glow glow-1"></div>
+      <div class="onboarding-bg-glow glow-2"></div>
+
+      <div class="onboarding-wrapper">
+        <h1 class="onboarding-title text-gradient">LEVEL UP</h1>
+        <p class="onboarding-subtitle">
+          Your personal development journey, powered by the anime universe you love.
+        </p>
+
+        <!-- Name Input -->
+        <div class="onboarding-name-step">
+          <input
+            type="text"
+            class="onboarding-name-input"
+            id="onboarding-name"
+            placeholder="Enter your warrior name..."
+            maxlength="30"
+            autocomplete="off"
+          />
+        </div>
+
+        <!-- Universe Selection -->
+        <div class="universe-label">CHOOSE YOUR UNIVERSE</div>
+        <div class="universe-grid stagger-children" id="universe-grid">
+          <!-- Rendered by JS -->
+        </div>
+
+        <button class="btn btn-primary btn-lg" id="onboarding-start-btn">
+          ⚡ BEGIN YOUR JOURNEY
+        </button>
+      </div>
+    </div>
+
+    <!-- ─── Dashboard Screen ───────────────── -->
+    <div class="screen screen-dashboard" id="screen-dashboard">
+      <div class="container">
+        <!-- Greeting & Meta -->
+        <div class="dashboard-header" id="dashboard-greeting">
+          <!-- Rendered by JS -->
+        </div>
+
+        <!-- XP Bar -->
+        <div id="dashboard-xp" class="mb-lg">
+          <!-- Rendered by JS -->
+        </div>
+
+        <!-- 3 Brackets -->
+        <div class="brackets-grid">
+          <div class="bracket" id="bracket-study">
+            <!-- Rendered by JS -->
+          </div>
+          <div class="bracket" id="bracket-exercise">
+            <!-- Rendered by JS -->
+          </div>
+          <div class="bracket" id="bracket-goals">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Bottom Row: Quote + Activity -->
+        <div class="dashboard-bottom">
+          <div id="dashboard-quote">
+            <!-- Rendered by JS -->
+          </div>
+          <div id="dashboard-activity">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── Diary Screen ──────────────────── -->
+    <div class="screen screen-diary" id="screen-diary">
+      <div class="container" id="diary-content">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <!-- ─── World Map Screen ──────────────── -->
+    <div class="screen screen-map" id="screen-map">
+      <div class="container" id="map-content">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <!-- ─── Health & Rest Screen ────────────── -->
+    <div class="screen screen-health" id="screen-health">
+      <div class="container" id="health-content">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <!-- ─── Spell Creator Screen ───────────── -->
+    <div class="screen screen-spells" id="screen-spells">
+      <div class="container" id="spells-content">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <!-- ─── Guild Screen ──────────────────── -->
+    <div class="screen screen-guild" id="screen-guild">
+      <div class="container" id="guild-content">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <!-- ─── Collection Screen ─────────────── -->
+    <div class="screen screen-collection" id="screen-collection">
+      <div class="container" id="collection-content">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <!-- ─── Profile Screen ────────────────── -->
+    <div class="screen screen-profile" id="screen-profile">
+      <div class="container" id="profile-content">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <!-- ─── Anime Watch & Manga Hub Screen ───── -->
+    <div class="screen screen-watch" id="screen-watch">
+      <div class="container" id="watch-content">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SCRIPTS (order matters: data → core → features → app)
+       ═══════════════════════════════════════════ -->
+  <script src="data/creatures.js"></script>
+  <script src="js/themes.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/onboarding.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/health.js"></script>
+  <script src="js/spells.js"></script>
+  <script src="js/watch.js"></script>
+  <script src="js/diary.js"></script>
+  <script src="js/guild.js"></script>
+  <script src="js/collection.js"></script>
+  <script src="js/profile.js"></script>
+  <script src="js/nav-device.js"></script>
+  <script src="js/cursor-pet.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

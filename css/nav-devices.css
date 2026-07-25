@@ -1,0 +1,2479 @@
+/* ============================================================
+   NAV DEVICES — Top-Left Floating Anime Device Navigation
+   ============================================================ */
+
+/* --- Container (Bottom Center Floating for ALL themes) --- */
+.nav-device-container {
+  position: fixed !important;
+  bottom: 24px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  top: auto !important;
+  right: auto !important;
+  z-index: 250;
+  pointer-events: none;
+}
+
+.nav-device-container * {
+  pointer-events: auto;
+}
+
+/* --- Collapsed Trigger Button --- */
+.nav-device-trigger {
+  width: 54px;
+  height: 54px;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  border: 2px solid var(--primary);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 20px var(--glow);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-device-trigger::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, var(--glow) 0%, transparent 60%);
+  opacity: 0.35;
+  animation: aura-rotate 6s linear infinite;
+  pointer-events: none;
+}
+
+.nav-device-trigger:hover {
+  transform: scale(1.12) rotate(-4deg);
+  box-shadow: 0 6px 28px rgba(0,0,0,0.6), 0 0 35px var(--glow);
+}
+
+.nav-device-trigger .trigger-icon {
+  position: relative;
+  z-index: 2;
+}
+
+.nav-device-trigger .trigger-pulse {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--primary-light);
+  border-radius: 50%;
+  top: 6px;
+  right: 6px;
+  box-shadow: 0 0 8px var(--primary);
+  animation: pulse 1.5s infinite;
+}
+
+.nav-device-container.open {
+  position: fixed;
+  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(5, 2, 15, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fade-in 0.3s ease forwards;
+}
+
+/* --- Expanded Device Panel --- */
+.nav-device-panel {
+  position: relative;
+  width: 380px;
+  max-width: 90vw;
+  max-height: 85vh;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--primary);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.8), 0 0 50px var(--glow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  transform: scale(0.7) translateY(30px);
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.nav-device-container.open .nav-device-panel {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+  visibility: visible;
+  overflow-y: auto;
+}
+
+.nav-device-container.open .nav-device-trigger {
+  display: none;
+}
+
+/* --- Header of Device --- */
+.device-header {
+  padding: 16px;
+  background: rgba(0,0,0,0.3);
+  border-bottom: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.device-title-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.device-icon-large {
+  font-size: 1.6rem;
+}
+
+.device-title {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--text);
+}
+
+.device-subtitle {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.device-close-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--glass-border);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.device-close-btn:hover {
+  background: rgba(255,255,255,0.2);
+  transform: scale(1.1);
+}
+
+/* --- User Info Card inside Device --- */
+.device-user-card {
+  padding: 12px 16px;
+  background: rgba(0,0,0,0.2);
+  border-bottom: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.device-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--gradient-hero);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  color: white;
+  border: 2px solid var(--primary);
+}
+
+.device-user-details {
+  flex: 1;
+  overflow: hidden;
+}
+
+.device-user-name {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.device-user-rank {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-transform: uppercase;
+}
+
+/* --- Navigation Links inside Device --- */
+.device-nav-links {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-y: auto;
+  max-height: 340px;
+}
+
+.device-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: all 0.2s;
+  text-decoration: none;
+  position: relative;
+  background: transparent;
+  border: 1px solid transparent;
+}
+
+.device-nav-item:hover {
+  color: var(--text);
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.1);
+  transform: translateX(4px);
+}
+
+.device-nav-item.active {
+  color: var(--bg);
+  background: var(--gradient-rank);
+  font-weight: 700;
+  box-shadow: 0 0 15px var(--glow);
+}
+
+.device-nav-item .nav-icon {
+  font-size: 1.1rem;
+}
+
+.device-nav-item .nav-badge {
+  margin-left: auto;
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 99px;
+  background: rgba(255,255,255,0.2);
+  color: inherit;
+}
+
+/* --- Footer of Device --- */
+.device-footer {
+  padding: 12px 16px;
+  background: rgba(0,0,0,0.3);
+  border-top: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+/* ═══════════════════════════════════════════
+   THEME-SPECIFIC DEVICE DESIGNS
+   ═══════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════
+   POKÉDEX — Full Two-Panel Flip-Open Device
+   (Pokémon theme)
+   ═══════════════════════════════════════════ */
+
+/* --- Pokédex Trigger: Top-Left Pokéball-styled --- */
+.nav-device--pokedex .nav-device-trigger {
+  position: relative;
+  top: auto;
+  left: auto;
+  bottom: auto;
+  transform: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #E53935 0%, #E53935 45%, #333 45%, #333 55%, #F5F5F5 55%, #F5F5F5 100%);
+  border: 3px solid #333;
+  box-shadow: 0 4px 20px rgba(229,57,53,0.5), 0 0 30px rgba(229,57,53,0.2);
+  z-index: 260;
+  overflow: hidden;
+  animation: float 3s ease-in-out infinite;
+  cursor: pointer;
+}
+
+.nav-device--pokedex .nav-device-trigger::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #F5F5F5;
+  border: 3px solid #333;
+  z-index: 3;
+}
+
+.nav-device--pokedex .nav-device-trigger .trigger-icon {
+  font-size: 0;
+  opacity: 0;
+}
+
+.nav-device--pokedex .nav-device-trigger .trigger-pulse {
+  background: #FFD600;
+  box-shadow: 0 0 10px #FFD600;
+  top: 4px;
+  right: 6px;
+}
+
+.nav-device--pokedex .nav-device-trigger::after {
+  background: radial-gradient(circle, rgba(229,57,53,0.4) 0%, transparent 60%);
+}
+
+.nav-device--pokedex .nav-device-trigger:hover {
+  transform: scale(1.12);
+  box-shadow: 0 6px 30px rgba(229,57,53,0.6), 0 0 50px rgba(229,57,53,0.3);
+}
+
+/* --- Pokédex Container --- */
+.nav-device--pokedex {
+  width: auto;
+  height: auto;
+}
+
+/* --- Pokédex Open State: Fullscreen with Background --- */
+.nav-device--pokedex.open {
+  position: fixed !important;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../../assets/images/pokedex-bg.png');
+  background-size: cover;
+  background-position: center;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fade-in 0.3s ease forwards;
+}
+
+.nav-device--pokedex.open::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(5,5,15,0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 0;
+}
+
+.nav-device--pokedex.open .nav-device-trigger {
+  display: none;
+}
+
+/* --- Pokédex Panel: Full Two-Panel Device --- */
+.nav-device--pokedex .nav-device-panel {
+  position: relative;
+  z-index: 1;
+  width: 92vw;
+  max-width: 860px;
+  height: auto;
+  max-height: 85vh;
+  border-radius: 20px;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  display: flex;
+  flex-direction: row;
+  overflow: visible;
+  opacity: 0;
+  transform: perspective(1000px) rotateY(-90deg) scale(0.6);
+  transition: none;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.nav-device--pokedex.open .nav-device-panel {
+  opacity: 1;
+  transform: perspective(1000px) rotateY(0deg) scale(1);
+  pointer-events: auto;
+  visibility: visible;
+  animation: pokedex-flip-open 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Hide default internals */
+.nav-device--pokedex .device-header,
+.nav-device--pokedex .device-user-card,
+.nav-device--pokedex .device-nav-links,
+.nav-device--pokedex .device-footer {
+  display: none;
+}
+
+/* --- Pokédex Body Wrapper --- */
+.pokedex-body {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 480px;
+  max-height: 80vh;
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow:
+    0 10px 50px rgba(0,0,0,0.7),
+    0 0 40px rgba(229,57,53,0.3),
+    inset 0 2px 4px rgba(255,255,255,0.15);
+}
+
+/* --- LEFT HALF of Pokédex --- */
+.pokedex-left {
+  flex: 1.1;
+  background: linear-gradient(170deg, #D32F2F 0%, #C62828 40%, #B71C1C 100%);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  border-right: none;
+}
+
+/* Top bar with lens and indicator LEDs */
+.pokedex-top-bar {
+  padding: 14px 18px 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(180deg, #B71C1C, #C62828);
+  border-bottom: 3px solid #8E0000;
+  position: relative;
+}
+
+/* Big cyan camera lens */
+.pokedex-lens {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #80DEEA, #00ACC1, #00838F);
+  border: 3px solid #E0E0E0;
+  box-shadow: 0 0 10px #00E5FF, inset 0 0 6px rgba(0,229,255,0.3);
+  animation: pokedex-lens-blink 4s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* Small indicator LEDs */
+.pokedex-leds {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.pokedex-led {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.3);
+}
+
+.pokedex-led.red { background: #FF5252; box-shadow: 0 0 6px #FF5252; }
+.pokedex-led.yellow { background: #FFD600; box-shadow: 0 0 6px #FFD600; }
+.pokedex-led.green { background: #4CAF50; box-shadow: 0 0 6px #4CAF50; }
+
+/* Main screen area */
+.pokedex-screen-area {
+  flex: 1;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Big main screen */
+.pokedex-main-screen {
+  background: #1A1A2E;
+  border-radius: 10px;
+  border: 3px solid #0D0D1A;
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+  min-height: 200px;
+  box-shadow: inset 0 2px 10px rgba(0,0,0,0.6);
+  animation: pokedex-screen-on 0.6s ease 0.3s both;
+}
+
+/* Screen scan line effect */
+.pokedex-main-screen::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(0,229,255,0.15);
+  animation: pokedex-scan-line 3s linear infinite;
+  pointer-events: none;
+}
+
+/* Screen header/title */
+.pokedex-screen-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #00E5FF;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+/* User info inside screen */
+.pokedex-screen-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.pokedex-screen-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #E53935, #FFD600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: #FFF;
+  border: 2px solid #FFD600;
+  box-shadow: 0 0 10px rgba(255,214,0,0.3);
+}
+
+.pokedex-screen-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #F0E8E8;
+}
+
+.pokedex-screen-rank {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #FFD600;
+  text-transform: uppercase;
+}
+
+/* Stats display inside screen */
+.pokedex-screen-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.pokedex-stat-row {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: #80D8FF;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.pokedex-stat-row .stat-label {
+  color: #546E7A;
+}
+
+/* Bottom controls (D-pad and buttons) */
+.pokedex-controls {
+  padding: 10px 16px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(0deg, #B71C1C, #C62828);
+  border-top: 2px solid #8E0000;
+}
+
+/* D-Pad */
+.pokedex-dpad-wrap {
+  display: grid;
+  grid-template-columns: repeat(3, 18px);
+  grid-template-rows: repeat(3, 18px);
+  gap: 1px;
+}
+
+.dpad-btn {
+  background: #222;
+  border-radius: 2px;
+}
+
+.dpad-btn.center { grid-area: 2 / 2; background: #333; }
+.dpad-btn.up { grid-area: 1 / 2; border-radius: 3px 3px 0 0; }
+.dpad-btn.down { grid-area: 3 / 2; border-radius: 0 0 3px 3px; }
+.dpad-btn.left-d { grid-area: 2 / 1; border-radius: 3px 0 0 3px; }
+.dpad-btn.right-d { grid-area: 2 / 3; border-radius: 0 3px 3px 0; }
+
+/* Action buttons */
+.pokedex-action-btns {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.pokedex-btn-red {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #FF1744;
+  border: 1px solid #B71C1C;
+}
+
+.pokedex-btn-blue {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #2196F3;
+  border: 1px solid #1565C0;
+}
+
+.pokedex-btn-green {
+  width: 24px;
+  height: 14px;
+  border-radius: 3px;
+  background: #4CAF50;
+  border: 1px solid #2E7D32;
+}
+
+/* --- HINGE between two halves --- */
+.pokedex-hinge {
+  width: 22px;
+  min-width: 22px;
+  background: linear-gradient(180deg, #8E0000, #B71C1C, #8E0000, #B71C1C, #8E0000);
+  position: relative;
+  box-shadow:
+    inset 2px 0 6px rgba(0,0,0,0.5),
+    inset -2px 0 6px rgba(0,0,0,0.5);
+}
+
+.pokedex-hinge::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 12px;
+  background: linear-gradient(180deg, #666, #888, #666);
+  border-radius: 3px;
+  box-shadow: 0 calc(60vh * 0.5) 0 0 #666;
+}
+
+/* --- RIGHT HALF of Pokédex --- */
+.pokedex-right {
+  flex: 1;
+  background: linear-gradient(170deg, #D32F2F 0%, #C62828 40%, #B71C1C 100%);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-y: auto;
+}
+
+/* Right top info screen */
+.pokedex-info-screen {
+  margin: 14px 14px 10px;
+  background: #0A1A0A;
+  border-radius: 6px;
+  border: 2px solid #333;
+  padding: 10px 12px;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.6);
+  animation: pokedex-screen-on 0.5s ease 0.5s both;
+}
+
+.pokedex-info-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: #4CAF50;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.pokedex-info-text {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.82rem;
+  color: #81C784;
+  line-height: 1.4;
+}
+
+/* Right: Nav buttons grid */
+.pokedex-nav-grid {
+  padding: 8px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.pokedex-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 6px;
+  background: #1A1A2E;
+  border: 2px solid #333355;
+  color: #E0E0E0;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.03em;
+}
+
+.pokedex-nav-btn:hover {
+  background: #252542;
+  border-color: #FFD600;
+  color: #FFD600;
+  transform: translateX(3px);
+  box-shadow: 0 0 10px rgba(255,214,0,0.2);
+}
+
+.pokedex-nav-btn.active {
+  background: linear-gradient(90deg, #FFD600, #FF9100);
+  color: #000;
+  border-color: #FFF;
+  font-weight: 700;
+  box-shadow: 0 0 15px rgba(255,214,0,0.3);
+}
+
+.pokedex-nav-btn .poke-nav-icon {
+  font-size: 1rem;
+  width: 24px;
+  text-align: center;
+}
+
+/* Right bottom: Large green button and action buttons */
+.pokedex-right-controls {
+  padding: 10px 14px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(0deg, #B71C1C, #C62828);
+  border-top: 2px solid #8E0000;
+  margin-top: auto;
+}
+
+.pokedex-green-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #66BB6A, #4CAF50, #2E7D32);
+  border: 3px solid #1B5E20;
+  box-shadow: 0 2px 8px rgba(76,175,80,0.4);
+  animation: pokedex-btn-pulse 2s ease-in-out infinite;
+}
+
+.pokedex-bottom-btns {
+  display: flex;
+  gap: 6px;
+}
+
+.pokedex-dark-btn {
+  width: 40px;
+  height: 16px;
+  border-radius: 4px;
+  background: #222;
+  border: 1px solid #444;
+}
+
+/* --- Pokédex Close Button --- */
+.pokedex-close-btn {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #B71C1C;
+  border: 2px solid #8E0000;
+  color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.pokedex-close-btn:hover {
+  background: #FF1744;
+  transform: scale(1.1);
+}
+
+/* Pokédex content stagger */
+.pokedex-body .pokedex-nav-btn {
+  opacity: 0;
+  animation: grimoire-page-reveal 0.3s ease forwards;
+}
+
+.pokedex-body .pokedex-nav-btn:nth-child(1) { animation-delay: 0.2s; }
+.pokedex-body .pokedex-nav-btn:nth-child(2) { animation-delay: 0.25s; }
+.pokedex-body .pokedex-nav-btn:nth-child(3) { animation-delay: 0.3s; }
+.pokedex-body .pokedex-nav-btn:nth-child(4) { animation-delay: 0.35s; }
+.pokedex-body .pokedex-nav-btn:nth-child(5) { animation-delay: 0.4s; }
+.pokedex-body .pokedex-nav-btn:nth-child(6) { animation-delay: 0.45s; }
+.pokedex-body .pokedex-nav-btn:nth-child(7) { animation-delay: 0.5s; }
+.pokedex-body .pokedex-nav-btn:nth-child(8) { animation-delay: 0.55s; }
+.pokedex-body .pokedex-nav-btn:nth-child(9) { animation-delay: 0.6s; }
+
+/* Pokédex scrollbar */
+.pokedex-right::-webkit-scrollbar,
+.pokedex-nav-grid::-webkit-scrollbar {
+  width: 4px;
+}
+
+.pokedex-right::-webkit-scrollbar-thumb,
+.pokedex-nav-grid::-webkit-scrollbar-thumb {
+  background: rgba(255,214,0,0.3);
+  border-radius: 4px;
+}
+
+/* Pokédex Responsive */
+@media (max-width: 680px) {
+  .pokedex-body {
+    flex-direction: column;
+    min-height: auto;
+    max-height: 90vh;
+  }
+
+  .pokedex-hinge {
+    width: 100%;
+    min-width: 100%;
+    height: 12px;
+    min-height: 12px;
+    background: linear-gradient(90deg, #8E0000, #B71C1C, #8E0000, #B71C1C, #8E0000);
+    box-shadow:
+      inset 0 2px 6px rgba(0,0,0,0.5),
+      inset 0 -2px 6px rgba(0,0,0,0.5);
+  }
+
+  .pokedex-hinge::before {
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 8px;
+    box-shadow: calc(80vw) 0 0 0 #666;
+  }
+
+  .nav-device--pokedex .nav-device-panel {
+    width: 95vw;
+    max-height: 92vh;
+  }
+
+  .pokedex-main-screen {
+    min-height: 150px;
+  }
+
+  .pokedex-close-btn {
+    top: -12px;
+    right: -6px;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   NINJA SCROLL — Full Unrolling Shinobi Scroll
+   (Naruto theme)
+   ═══════════════════════════════════════════ */
+
+/* --- Ninja Scroll Trigger: Bottom-Center Headband Scroll --- */
+.nav-device--scroll .nav-device-trigger {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: auto;
+  width: 64px;
+  height: 80px;
+  border-radius: 6px;
+  background: url('../../assets/images/naruto-scroll.png') center/cover no-repeat;
+  border: 2px solid rgba(245,124,0,0.6);
+  box-shadow: 0 0 20px rgba(245,124,0,0.4), 0 0 35px rgba(245,124,0,0.2);
+  animation: grimoire-float 4s ease-in-out infinite;
+  z-index: 260;
+  overflow: visible;
+  cursor: pointer;
+}
+
+.nav-device--scroll .nav-device-trigger .trigger-icon {
+  font-size: 0;
+  opacity: 0;
+}
+
+.nav-device--scroll .nav-device-trigger .trigger-pulse {
+  background: #FF9800;
+  box-shadow: 0 0 10px #FF9800;
+  top: -4px;
+  right: -4px;
+}
+
+.nav-device--scroll .nav-device-trigger:hover {
+  transform: translateX(-50%) scale(1.12);
+  box-shadow: 0 0 30px rgba(245,124,0,0.7), 0 0 60px rgba(245,124,0,0.4);
+}
+
+.nav-device--scroll {
+  width: auto;
+  height: auto;
+}
+
+/* --- Ninja Scroll Open State: Fullscreen Overlay --- */
+.nav-device--scroll.open {
+  position: fixed !important;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../../assets/images/dashboards/naruto_hokage.png');
+  background-size: cover;
+  background-position: center;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fade-in 0.3s ease forwards;
+}
+
+.nav-device--scroll.open::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(10,5,2,0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 0;
+}
+
+.nav-device--scroll.open .nav-device-trigger {
+  display: none;
+}
+
+/* --- Ninja Scroll Panel: The Unrolled Scroll --- */
+.nav-device--scroll .nav-device-panel {
+  position: relative;
+  z-index: 1;
+  width: 94vw;
+  max-width: 920px;
+  height: auto;
+  max-height: 85vh;
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  display: flex;
+  flex-direction: row;
+  overflow: visible;
+  opacity: 0;
+  transform: scaleX(0.05) scaleY(0.9);
+  transition: none;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.nav-device--scroll.open .nav-device-panel {
+  opacity: 1;
+  transform: scaleX(1) scaleY(1);
+  pointer-events: auto;
+  visibility: visible;
+  animation: scroll-unroll-open 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Hide default internals */
+.nav-device--scroll .device-header,
+.nav-device--scroll .device-user-card,
+.nav-device--scroll .device-nav-links,
+.nav-device--scroll .device-footer {
+  display: none;
+}
+
+/* --- Scroll Body Wrapper --- */
+.ninja-scroll-body {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 480px;
+  max-height: 80vh;
+  position: relative;
+}
+
+/* Wooden Rollers on Left and Right */
+.scroll-roller {
+  width: 30px;
+  min-width: 30px;
+  background: linear-gradient(90deg, #1C1008 0%, #3D2616 40%, #5C3A21 60%, #2A180C 100%);
+  border-radius: 6px;
+  box-shadow:
+    0 0 15px rgba(0,0,0,0.8),
+    inset 2px 0 4px rgba(255,255,255,0.2),
+    inset -2px 0 4px rgba(0,0,0,0.6);
+  position: relative;
+  z-index: 5;
+}
+
+.scroll-roller::before,
+.scroll-roller::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 38px;
+  height: 14px;
+  background: radial-gradient(circle at 40% 40%, #FFD700, #B8860B, #5B4208);
+  border-radius: 4px;
+  border: 1px solid #332200;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+}
+
+.scroll-roller::before { top: -10px; }
+.scroll-roller::after { bottom: -10px; }
+
+/* Scroll Canvas Parchment */
+.scroll-canvas {
+  flex: 1;
+  background:
+    repeating-linear-gradient(0deg, rgba(0,0,0,0.02) 0px, rgba(0,0,0,0.02) 1px, transparent 1px, transparent 3px),
+    linear-gradient(180deg,
+      #8C2D19 0px, #8C2D19 28px,
+      #EFE4CE 28px, #F5EBDA 60%, #E6D8BC 100%,
+      #8C2D19 calc(100% - 28px), #8C2D19 100%
+    );
+  border-top: 3px solid #5C1A0C;
+  border-bottom: 3px solid #5C1A0C;
+  box-shadow: inset 0 0 30px rgba(90,60,30,0.4), 0 10px 40px rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Scroll Decorative Top and Bottom Borders with Seals */
+.scroll-canvas::before,
+.scroll-canvas::after {
+  content: '🐸 🍥 📜 🐸 🍥 📜 🐸 🍥 📜 🐸 🍥 📜 🐸 🍥 📜';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 0.75rem;
+  color: #FFD700;
+  letter-spacing: 12px;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.scroll-canvas::before { top: 0; }
+.scroll-canvas::after { bottom: 0; }
+
+/* Left Page / Section inside Scroll */
+.scroll-section-left {
+  flex: 1;
+  padding: 38px 24px 38px;
+  overflow-y: auto;
+  border-right: 2px dashed rgba(140,45,25,0.3);
+  position: relative;
+}
+
+/* Right Section inside Scroll */
+.scroll-section-right {
+  flex: 1.1;
+  padding: 38px 24px 38px;
+  overflow-y: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Kanji Vertical Banner Column */
+.scroll-kanji-banner {
+  position: absolute;
+  right: 12px;
+  top: 38px;
+  bottom: 38px;
+  writing-mode: vertical-rl;
+  font-family: serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: rgba(140,45,25,0.4);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Scroll Section Headers */
+.scroll-header-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #7A1C0A;
+  text-align: center;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid rgba(140,45,25,0.3);
+}
+
+/* Scroll Nav Link Items */
+.scroll-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  margin-bottom: 6px;
+  border-radius: 6px;
+  background: rgba(140,45,25,0.06);
+  border: 1px solid rgba(140,45,25,0.2);
+  color: #3A2012;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.03em;
+}
+
+.scroll-nav-item:hover {
+  background: rgba(245,124,0,0.18);
+  border-color: #F57C00;
+  color: #8C2D19;
+  transform: translateX(4px);
+  box-shadow: 0 0 10px rgba(245,124,0,0.2);
+}
+
+.scroll-nav-item.active {
+  background: linear-gradient(90deg, #F57C00, #D32F2F);
+  color: #FFF;
+  border-color: #D32F2F;
+  box-shadow: 0 0 12px rgba(211,47,47,0.3);
+}
+
+.scroll-nav-item .scroll-icon {
+  font-size: 1.1rem;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Scroll User Shinobi Card */
+.scroll-user-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  background: rgba(140,45,25,0.08);
+  border: 1px dashed rgba(140,45,25,0.3);
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.scroll-user-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #F57C00, #D32F2F);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: #FFF;
+  border: 2px solid #FFD700;
+  box-shadow: 0 0 10px rgba(245,124,0,0.4);
+}
+
+.scroll-user-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #3A2012;
+}
+
+.scroll-user-rank {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #D32F2F;
+  text-transform: uppercase;
+}
+
+/* Scroll Shinobi Stats */
+.scroll-info-block {
+  margin-bottom: 14px;
+}
+
+.scroll-info-label {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #8C2D19;
+  margin-bottom: 4px;
+}
+
+.scroll-info-val {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #2C180C;
+}
+
+/* Leaf Village Emblem Stamp */
+.scroll-leaf-seal {
+  width: 60px;
+  height: 60px;
+  margin: 10px auto 0;
+  background: radial-gradient(circle, rgba(211,47,47,0.15), transparent 70%);
+  border: 2px solid rgba(211,47,47,0.4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: #D32F2F;
+  animation: scroll-seal-pulse 3s ease-in-out infinite;
+}
+
+/* Close Button on Ninja Scroll */
+.scroll-close-btn {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #5C1A0C;
+  border: 2px solid #FFD700;
+  color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.scroll-close-btn:hover {
+  background: #D32F2F;
+  transform: scale(1.1);
+}
+
+/* Scroll content stagger */
+.scroll-canvas .scroll-nav-item {
+  opacity: 0;
+  animation: grimoire-page-reveal 0.35s ease forwards;
+}
+
+.scroll-canvas .scroll-nav-item:nth-child(1) { animation-delay: 0.2s; }
+.scroll-canvas .scroll-nav-item:nth-child(2) { animation-delay: 0.25s; }
+.scroll-canvas .scroll-nav-item:nth-child(3) { animation-delay: 0.3s; }
+.scroll-canvas .scroll-nav-item:nth-child(4) { animation-delay: 0.35s; }
+.scroll-canvas .scroll-nav-item:nth-child(5) { animation-delay: 0.4s; }
+.scroll-canvas .scroll-nav-item:nth-child(6) { animation-delay: 0.45s; }
+.scroll-canvas .scroll-nav-item:nth-child(7) { animation-delay: 0.5s; }
+.scroll-canvas .scroll-nav-item:nth-child(8) { animation-delay: 0.55s; }
+.scroll-canvas .scroll-nav-item:nth-child(9) { animation-delay: 0.6s; }
+
+/* Responsive Scroll */
+@media (max-width: 680px) {
+  .scroll-canvas {
+    flex-direction: column;
+  }
+  .scroll-section-left {
+    border-right: none;
+    border-bottom: 2px dashed rgba(140,45,25,0.3);
+  }
+  .scroll-kanji-banner {
+    display: none;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   DRAGON RADAR — Full Handheld Bulma Radar Device
+   (Dragon Ball theme)
+   ═══════════════════════════════════════════ */
+
+/* --- Dragon Radar Trigger: Bottom-Center Round Radar --- */
+.nav-device--dragonradar .nav-device-trigger {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: auto;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #00E676 0%, #1B5E20 70%, #003300 100%);
+  border: 4px solid #C0C0C0;
+  box-shadow:
+    0 0 20px rgba(0,230,118,0.5),
+    0 0 40px rgba(0,230,118,0.2),
+    inset 0 0 10px rgba(0,0,0,0.6);
+  z-index: 260;
+  overflow: visible;
+  cursor: pointer;
+}
+
+/* Top silver button knob on collapsed radar trigger */
+.nav-device--dragonradar .nav-device-trigger::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 10px;
+  background: linear-gradient(180deg, #E0E0E0, #9E9E9E, #616161);
+  border-radius: 4px 4px 0 0;
+  border: 1px solid #424242;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+.nav-device--dragonradar .nav-device-trigger .trigger-icon {
+  font-size: 0;
+  opacity: 0;
+}
+
+.nav-device--dragonradar .nav-device-trigger .trigger-pulse {
+  background: #FFD600;
+  box-shadow: 0 0 10px #FFD600;
+  top: 4px;
+  right: 6px;
+}
+
+.nav-device--dragonradar .nav-device-trigger:hover {
+  transform: translateX(-50%) scale(1.12);
+  box-shadow: 0 0 30px rgba(0,230,118,0.7), 0 0 60px rgba(0,230,118,0.4);
+}
+
+.nav-device--dragonradar {
+  width: auto;
+  height: auto;
+}
+
+/* --- Dragon Radar Open State: Fullscreen Overlay --- */
+.nav-device--dragonradar.open {
+  position: fixed !important;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../../assets/images/dragonball-bg.png');
+  background-size: cover;
+  background-position: center;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fade-in 0.3s ease forwards;
+}
+
+.nav-device--dragonradar.open::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(5,5,10,0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 0;
+}
+
+.nav-device--dragonradar.open .nav-device-trigger {
+  display: none;
+}
+
+/* --- Dragon Radar Panel: Handheld Round Radar Device --- */
+.nav-device--dragonradar .nav-device-panel {
+  position: relative;
+  z-index: 1;
+  width: 92vw;
+  max-width: 620px;
+  height: auto;
+  max-height: 88vh;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  opacity: 0;
+  transform: scale(0.4) rotate(-15deg);
+  transition: none;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.nav-device--dragonradar.open .nav-device-panel {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+  pointer-events: auto;
+  visibility: visible;
+  animation: pokedex-flip-open 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Hide default internals */
+.nav-device--dragonradar .device-header,
+.nav-device--dragonradar .device-user-card,
+.nav-device--dragonradar .device-nav-links,
+.nav-device--dragonradar .device-footer {
+  display: none;
+}
+
+/* --- Dragon Radar Body Outer Frame --- */
+.radar-body-frame {
+  width: 100%;
+  max-width: 580px;
+  background: linear-gradient(145deg, #E0E0E0 0%, #BDBDBD 40%, #9E9E9E 70%, #757575 100%);
+  border-radius: 50%;
+  padding: 24px;
+  position: relative;
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.8),
+    0 0 50px rgba(0,230,118,0.3),
+    inset 0 4px 8px rgba(255,255,255,0.8),
+    inset 0 -6px 12px rgba(0,0,0,0.6);
+  border: 4px solid #616161;
+}
+
+/* Top Silver Push Button Knob */
+.radar-top-knob {
+  position: absolute;
+  top: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 34px;
+  background: linear-gradient(180deg, #F5F5F5 0%, #BDBDBD 50%, #616161 100%);
+  border-radius: 8px 8px 0 0;
+  border: 3px solid #424242;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5), inset 0 2px 4px rgba(255,255,255,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.radar-top-knob::after {
+  content: '';
+  width: 24px;
+  height: 6px;
+  background: #333;
+  border-radius: 3px;
+}
+
+/* Side Strap Loop */
+.radar-side-strap {
+  position: absolute;
+  top: 40px;
+  right: -24px;
+  width: 45px;
+  height: 240px;
+  border: 8px solid #424242;
+  border-left: none;
+  border-radius: 0 40px 40px 0;
+  background: transparent;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Inner Green Radar Screen */
+.radar-screen-inner {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(0,230,118,0.15) 0%, rgba(0,50,0,0.85) 90%),
+    repeating-linear-gradient(0deg, rgba(0,230,118,0.18) 0px, rgba(0,230,118,0.18) 1px, transparent 1px, transparent 20px),
+    repeating-linear-gradient(90deg, rgba(0,230,118,0.18) 0px, rgba(0,230,118,0.18) 1px, transparent 1px, transparent 20px),
+    #051A05;
+  border: 4px solid #1B5E20;
+  box-shadow:
+    inset 0 0 30px rgba(0,0,0,0.8),
+    0 0 20px rgba(0,230,118,0.4);
+  position: relative;
+  overflow: hidden;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Radar Sweep Line Animation */
+.radar-screen-inner::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: conic-gradient(from 0deg, rgba(0,230,118,0.4) 0deg, transparent 60deg);
+  transform-origin: 0% 0%;
+  animation: radar-sweep 4s linear infinite;
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+@keyframes radar-sweep {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Green Directional Triangles */
+.radar-arrow {
+  position: absolute;
+  color: #00E676;
+  font-size: 1.1rem;
+  text-shadow: 0 0 8px #00E676;
+  user-select: none;
+  pointer-events: none;
+}
+
+.radar-arrow.top { top: 12px; left: 50%; transform: translateX(-50%); }
+.radar-arrow.bottom { bottom: 12px; left: 50%; transform: translateX(-50%) rotate(180deg); }
+.radar-arrow.left { left: 12px; top: 50%; transform: translateY(-50%) rotate(-90deg); }
+.radar-arrow.right { right: 12px; top: 50%; transform: translateY(-50%) rotate(90deg); }
+
+/* Glowing Yellow Dragon Ball Blips */
+.dragon-ball-blip {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #FFF, #FFD600, #FF6D00);
+  box-shadow: 0 0 10px #FFD600, 0 0 20px #FF6D00;
+  animation: blip-pulse 1.8s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes blip-pulse {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  100% { transform: scale(1.2); opacity: 1; }
+}
+
+/* User Info Header inside Radar Screen */
+.radar-user-header {
+  text-align: center;
+  z-index: 2;
+  margin-top: 10px;
+}
+
+.radar-user-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #FFD600;
+  text-shadow: 0 0 10px rgba(255,214,0,0.6);
+  letter-spacing: 0.08em;
+}
+
+.radar-user-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: #69F0AE;
+  text-transform: uppercase;
+}
+
+/* Navigation Buttons inside Radar Screen */
+.radar-nav-container {
+  z-index: 2;
+  width: 100%;
+  max-width: 380px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin: 10px 0;
+  max-height: 240px;
+  overflow-y: auto;
+  padding: 4px;
+}
+
+.radar-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: rgba(0,40,0,0.6);
+  border: 1.5px solid rgba(0,230,118,0.4);
+  color: #B9F6CA;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.02em;
+}
+
+.radar-nav-btn:hover {
+  background: rgba(0,230,118,0.25);
+  border-color: #FFD600;
+  color: #FFD600;
+  transform: scale(1.03);
+  box-shadow: 0 0 10px rgba(255,214,0,0.3);
+}
+
+.radar-nav-btn.active {
+  background: linear-gradient(90deg, #FFD600, #FF6D00);
+  color: #000;
+  border-color: #FFF;
+  font-weight: 800;
+  box-shadow: 0 0 14px rgba(255,214,0,0.5);
+}
+
+/* Close Button on Dragon Radar */
+.radar-close-btn {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #C62828;
+  border: 2px solid #FFD600;
+  color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 15;
+  transition: all 0.2s;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.radar-close-btn:hover {
+  background: #FF1744;
+  transform: scale(1.1);
+}
+
+/* Responsive Radar */
+@media (max-width: 680px) {
+  .nav-device--dragonradar .nav-device-panel {
+    width: 95vw;
+  }
+  .radar-nav-container {
+    grid-template-columns: 1fr;
+    max-height: 200px;
+  }
+}
+
+/* ── 4. System HUD Window (Solo Leveling) ── */
+.nav-device--system .nav-device-panel {
+  background: rgba(10, 10, 30, 0.94);
+  backdrop-filter: blur(16px);
+  border: 2px solid #00E5FF;
+  border-radius: 8px;
+  box-shadow: 0 0 35px rgba(0, 229, 255, 0.5);
+  position: relative;
+}
+
+.nav-device--system .nav-device-panel::before {
+  content: '[ SYSTEM UI v3.2 ]';
+  position: absolute;
+  top: 4px;
+  right: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: #00E5FF;
+  opacity: 0.7;
+}
+
+.nav-device--system .device-title {
+  color: #00E5FF;
+  text-shadow: 0 0 10px #00E5FF;
+}
+
+.nav-device--system .device-nav-item {
+  color: #80D8FF;
+  background: rgba(0, 229, 255, 0.05);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+}
+
+.nav-device--system .device-nav-item.active {
+  background: linear-gradient(90deg, #7B1FA2, #00E5FF);
+  color: #FFF;
+}
+
+/* ── 5. Denreishinki Soul Pager (Bleach) ── */
+.nav-device--soulpager .nav-device-panel {
+  background: #0E1620;
+  border: 2px solid #00BCD4;
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(0, 188, 212, 0.4);
+}
+
+.nav-device--soulpager .device-title {
+  color: #80DEEA;
+}
+
+.nav-device--soulpager .device-nav-item {
+  color: #B2EBF2;
+  border: 1px solid rgba(0, 188, 212, 0.2);
+}
+
+.nav-device--soulpager .device-nav-item.active {
+  background: linear-gradient(90deg, #00BCD4, #7C4DFF);
+  color: #FFF;
+}
+
+/* ── 6. Beetle 07 Phone (Hunter x Hunter) ── */
+.nav-device--hunterphone .nav-device-panel {
+  background: #142814;
+  border: 2px solid #4CAF50;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(76, 175, 80, 0.4);
+}
+
+.nav-device--hunterphone .device-title {
+  color: #81C784;
+}
+
+.nav-device--hunterphone .device-nav-item {
+  color: #C8E6C9;
+  border: 1px solid rgba(76, 175, 80, 0.2);
+}
+
+.nav-device--hunterphone .device-nav-item.active {
+  background: linear-gradient(90deg, #4CAF50, #FFB300);
+  color: #000;
+}
+
+/* ── 7. Kasugai Crow Message (Demon Slayer) ── */
+.nav-device--wisterialetter .nav-device-panel {
+  background: #1A1420;
+  border: 2px solid #BA68C8;
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(186, 104, 200, 0.4);
+}
+
+.nav-device--wisterialetter .device-title {
+  color: #E1BEE7;
+}
+
+.nav-device--wisterialetter .device-nav-item {
+  color: #F3E5F5;
+  border: 1px solid rgba(186, 104, 200, 0.2);
+}
+
+/* ═══════════════════════════════════════════
+   GRIMOIRE — Full-Screen Opening Book Device
+   (Black Clover & Wand and Sword themes)
+   ═══════════════════════════════════════════ */
+
+/* --- Grimoire Trigger: Bottom-Center Floating Book --- */
+.nav-device--grimoire .nav-device-trigger {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: auto;
+  width: 72px;
+  height: 90px;
+  border-radius: 6px;
+  background: url('../../assets/images/grimoire-book.png') center/cover no-repeat;
+  border: 2px solid rgba(198,40,40,0.6);
+  box-shadow: 0 0 20px rgba(198,40,40,0.4), 0 0 40px rgba(198,40,40,0.2);
+  animation: grimoire-float 4s ease-in-out infinite, grimoire-aura 3s ease-in-out infinite;
+  z-index: 260;
+  overflow: visible;
+  font-size: 0;
+}
+
+.nav-device--grimoire .nav-device-trigger .trigger-icon {
+  font-size: 0;
+  opacity: 0;
+}
+
+.nav-device--grimoire .nav-device-trigger .trigger-pulse {
+  width: 10px;
+  height: 10px;
+  background: #C62828;
+  box-shadow: 0 0 12px #C62828, 0 0 24px rgba(198,40,40,0.5);
+  top: -4px;
+  right: -4px;
+}
+
+.nav-device--grimoire .nav-device-trigger::after {
+  background: radial-gradient(circle, rgba(198,40,40,0.5) 0%, transparent 60%);
+}
+
+.nav-device--grimoire .nav-device-trigger:hover {
+  transform: translateX(-50%) scale(1.12);
+  box-shadow: 0 0 30px rgba(198,40,40,0.6), 0 0 60px rgba(198,40,40,0.3), 0 0 90px rgba(198,40,40,0.15);
+}
+
+/* --- Grimoire: Reposition the container itself --- */
+.nav-device--grimoire {
+  top: auto !important;
+  left: auto !important;
+  bottom: 0;
+  right: 0;
+  width: auto;
+  height: auto;
+}
+
+/* --- Grimoire Open State: Fullscreen with Background --- */
+.nav-device--grimoire.open {
+  position: fixed !important;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../../assets/images/grimoire-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fade-in 0.4s ease forwards;
+}
+
+.nav-device--grimoire.open::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(5,2,10,0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 0;
+}
+
+.nav-device--grimoire.open .nav-device-trigger {
+  display: none;
+}
+
+/* --- Grimoire Panel: The Open Book --- */
+.nav-device--grimoire .nav-device-panel {
+  position: relative;
+  z-index: 1;
+  width: 92vw;
+  max-width: 900px;
+  height: auto;
+  max-height: 85vh;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  display: flex;
+  flex-direction: row;
+  overflow: visible;
+  opacity: 0;
+  transform: perspective(1200px) rotateY(0deg) scale(0.3);
+  transition: none;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.nav-device--grimoire.open .nav-device-panel {
+  opacity: 1;
+  transform: perspective(1200px) rotateY(0deg) scale(1);
+  pointer-events: auto;
+  visibility: visible;
+  animation: grimoire-book-open 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Hide default header, user-card, footer, nav-links inside grimoire — we rebuild them in the book pages */
+.nav-device--grimoire .device-header,
+.nav-device--grimoire .device-user-card,
+.nav-device--grimoire .device-nav-links,
+.nav-device--grimoire .device-footer {
+  display: none;
+}
+
+/* --- Grimoire Book Wrapper (new structure) --- */
+.grimoire-book {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 480px;
+  max-height: 80vh;
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  /* Leather cover edge */
+  box-shadow:
+    0 8px 40px rgba(0,0,0,0.7),
+    0 0 60px rgba(198,40,40,0.25),
+    inset 0 0 30px rgba(0,0,0,0.4);
+  border: 3px solid #3A2A1A;
+}
+
+/* --- Left Page --- */
+.grimoire-page {
+  flex: 1;
+  padding: 28px 24px;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* Old dark parchment */
+  background:
+    /* grain texture */
+    repeating-linear-gradient(
+      0deg,
+      rgba(0,0,0,0.03) 0px,
+      rgba(0,0,0,0.03) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0,0,0,0.02) 0px,
+      rgba(0,0,0,0.02) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    /* base parchment color */
+    linear-gradient(165deg, #2A2318 0%, #1E1A14 30%, #22201A 60%, #2A2520 100%);
+  color: #C8B8A0;
+}
+
+.grimoire-page.page-left {
+  border-right: 1px solid rgba(60,45,30,0.5);
+  /* worn left edge */
+  box-shadow: inset -8px 0 20px rgba(0,0,0,0.3);
+}
+
+.grimoire-page.page-right {
+  border-left: 1px solid rgba(60,45,30,0.5);
+  /* worn right edge */
+  box-shadow: inset 8px 0 20px rgba(0,0,0,0.3);
+}
+
+/* Page aged edge stains */
+.grimoire-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.grimoire-page.page-left::before {
+  left: 0;
+  background: linear-gradient(90deg, rgba(30,22,12,0.6) 0%, transparent 100%);
+}
+
+.grimoire-page.page-right::before {
+  right: 0;
+  background: linear-gradient(-90deg, rgba(30,22,12,0.6) 0%, transparent 100%);
+}
+
+/* Page worn corners */
+.grimoire-page::after {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.5;
+}
+
+.grimoire-page.page-left::after {
+  bottom: 0;
+  left: 0;
+  background: radial-gradient(circle at 0% 100%, rgba(20,15,8,0.8) 0%, transparent 70%);
+}
+
+.grimoire-page.page-right::after {
+  bottom: 0;
+  right: 0;
+  background: radial-gradient(circle at 100% 100%, rgba(20,15,8,0.8) 0%, transparent 70%);
+}
+
+/* --- Book Spine/Binding --- */
+.grimoire-spine {
+  width: 28px;
+  min-width: 28px;
+  background:
+    linear-gradient(180deg,
+      #1A120A 0%,
+      #2A1C12 15%,
+      #3A2A1A 30%,
+      #2A1C12 50%,
+      #3A2A1A 70%,
+      #2A1C12 85%,
+      #1A120A 100%
+    );
+  position: relative;
+  box-shadow:
+    inset 3px 0 8px rgba(0,0,0,0.6),
+    inset -3px 0 8px rgba(0,0,0,0.6);
+  z-index: 3;
+}
+
+/* Spine stitch lines */
+.grimoire-spine::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(160,130,90,0.4) 0px,
+    rgba(160,130,90,0.4) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+}
+
+/* Spine metal clasps */
+.grimoire-spine::after {
+  content: '';
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 6px;
+  background: linear-gradient(180deg, #8B7355, #5C4A32);
+  border-radius: 2px;
+  box-shadow:
+    0 0 4px rgba(139,115,85,0.4),
+    0 calc(85vh * 0.55) 0 0 #5C4A32;
+}
+
+/* --- Page Title Headers --- */
+.grimoire-page-title {
+  font-family: 'Rajdhani', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #D4B896;
+  text-align: center;
+  padding-bottom: 10px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid rgba(160,130,90,0.3);
+  position: relative;
+}
+
+.grimoire-page-title::after {
+  content: '✦';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  color: rgba(198,40,40,0.6);
+  background: #2A2318;
+  padding: 0 6px;
+}
+
+/* --- Grimoire Spell Entry (Nav Links) --- */
+.grimoire-spell-entry {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  margin-bottom: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  background: rgba(0,0,0,0.15);
+  border: 1px solid rgba(160,130,90,0.12);
+  transition: all 0.25s ease;
+  position: relative;
+  color: #B8A888;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.grimoire-spell-entry:hover {
+  background: rgba(198,40,40,0.12);
+  border-color: rgba(198,40,40,0.3);
+  color: #D8C8A8;
+  transform: translateX(3px);
+  box-shadow: 0 0 12px rgba(198,40,40,0.15);
+}
+
+.grimoire-spell-entry.active {
+  background: linear-gradient(90deg, rgba(198,40,40,0.25) 0%, rgba(198,40,40,0.08) 100%);
+  border-color: rgba(198,40,40,0.5);
+  color: #EAD8B8;
+  box-shadow: 0 0 15px rgba(198,40,40,0.2);
+}
+
+.grimoire-spell-entry .spell-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.3);
+  border: 2px solid rgba(160,130,90,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.grimoire-spell-entry.active .spell-icon {
+  border-color: rgba(198,40,40,0.6);
+  box-shadow: 0 0 10px rgba(198,40,40,0.3);
+  background: rgba(198,40,40,0.15);
+}
+
+.grimoire-spell-entry .spell-name {
+  flex: 1;
+}
+
+/* --- Grimoire Right Page: User Info Section --- */
+.grimoire-info-section {
+  margin-bottom: 16px;
+}
+
+.grimoire-info-label {
+  font-family: 'Rajdhani', serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(160,130,90,0.6);
+  margin-bottom: 6px;
+}
+
+.grimoire-info-value {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #C8B8A0;
+  line-height: 1.4;
+}
+
+.grimoire-info-value.highlight {
+  color: #D4B896;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+/* --- Grimoire User Card on Right Page --- */
+.grimoire-user-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(0,0,0,0.2);
+  border: 1px solid rgba(160,130,90,0.15);
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.grimoire-user-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #C62828, #8E0000);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: #FFD700;
+  border: 2px solid rgba(198,40,40,0.5);
+  box-shadow: 0 0 12px rgba(198,40,40,0.3);
+  flex-shrink: 0;
+}
+
+.grimoire-user-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #D8C8A8;
+}
+
+.grimoire-user-rank {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #C62828;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* --- Grimoire Mascot Image --- */
+.grimoire-mascot {
+  width: 80px;
+  height: 80px;
+  margin: 8px auto 12px;
+  display: block;
+  object-fit: contain;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 8px rgba(198,40,40,0.3));
+  animation: grimoire-rune-glow 4s ease-in-out infinite;
+}
+
+/* --- Grimoire Divider Line --- */
+.grimoire-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(160,130,90,0.3) 50%, transparent 100%);
+  margin: 12px 0;
+}
+
+/* --- Grimoire Close Button --- */
+.grimoire-close-btn {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #1A120A;
+  border: 2px solid rgba(160,130,90,0.4);
+  color: #C8B8A0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.grimoire-close-btn:hover {
+  background: #C62828;
+  border-color: #C62828;
+  color: #FFF;
+  transform: scale(1.1);
+}
+
+/* --- Grimoire Page Content Stagger Animation --- */
+.grimoire-book .grimoire-spell-entry,
+.grimoire-book .grimoire-info-section,
+.grimoire-book .grimoire-user-card {
+  opacity: 0;
+  animation: grimoire-page-reveal 0.4s ease forwards;
+}
+
+.grimoire-book .grimoire-spell-entry:nth-child(1) { animation-delay: 0.15s; }
+.grimoire-book .grimoire-spell-entry:nth-child(2) { animation-delay: 0.2s; }
+.grimoire-book .grimoire-spell-entry:nth-child(3) { animation-delay: 0.25s; }
+.grimoire-book .grimoire-spell-entry:nth-child(4) { animation-delay: 0.3s; }
+.grimoire-book .grimoire-spell-entry:nth-child(5) { animation-delay: 0.35s; }
+.grimoire-book .grimoire-spell-entry:nth-child(6) { animation-delay: 0.4s; }
+.grimoire-book .grimoire-spell-entry:nth-child(7) { animation-delay: 0.45s; }
+.grimoire-book .grimoire-spell-entry:nth-child(8) { animation-delay: 0.5s; }
+.grimoire-book .grimoire-spell-entry:nth-child(9) { animation-delay: 0.55s; }
+
+.grimoire-book .grimoire-user-card { animation-delay: 0.15s; }
+.grimoire-book .grimoire-info-section:nth-child(3) { animation-delay: 0.25s; }
+.grimoire-book .grimoire-info-section:nth-child(4) { animation-delay: 0.3s; }
+.grimoire-book .grimoire-info-section:nth-child(5) { animation-delay: 0.35s; }
+.grimoire-book .grimoire-info-section:nth-child(6) { animation-delay: 0.4s; }
+
+/* --- Grimoire Scrollbar Styling --- */
+.grimoire-page::-webkit-scrollbar {
+  width: 4px;
+}
+
+.grimoire-page::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.2);
+}
+
+.grimoire-page::-webkit-scrollbar-thumb {
+  background: rgba(160,130,90,0.3);
+  border-radius: 4px;
+}
+
+/* --- Grimoire Responsive --- */
+@media (max-width: 680px) {
+  .grimoire-book {
+    flex-direction: column;
+    min-height: auto;
+    max-height: 88vh;
+  }
+
+  .grimoire-spine {
+    width: 100%;
+    min-width: 100%;
+    height: 12px;
+    min-height: 12px;
+    box-shadow:
+      inset 0 3px 8px rgba(0,0,0,0.6),
+      inset 0 -3px 8px rgba(0,0,0,0.6);
+  }
+
+  .grimoire-spine::before {
+    top: 50%;
+    transform: translateY(-50%);
+    left: 20px;
+    right: 20px;
+    width: auto;
+    height: 2px;
+    background: repeating-linear-gradient(
+      90deg,
+      rgba(160,130,90,0.4) 0px,
+      rgba(160,130,90,0.4) 8px,
+      transparent 8px,
+      transparent 16px
+    );
+  }
+
+  .grimoire-spine::after {
+    top: 50%;
+    left: 15%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 18px;
+    box-shadow: calc(70vw) 0 0 0 #5C4A32;
+  }
+
+  .grimoire-page {
+    padding: 20px 16px;
+  }
+
+  .grimoire-page.page-left {
+    border-right: none;
+    border-bottom: none;
+    box-shadow: inset 0 -8px 20px rgba(0,0,0,0.3);
+  }
+
+  .grimoire-page.page-right {
+    border-left: none;
+    border-top: none;
+    box-shadow: inset 0 8px 20px rgba(0,0,0,0.3);
+  }
+
+  .grimoire-page.page-left::before {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: auto;
+    width: 100%;
+    height: 30px;
+    background: linear-gradient(180deg, rgba(30,22,12,0.6) 0%, transparent 100%);
+  }
+
+  .grimoire-page.page-right::before {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 30px;
+    background: linear-gradient(0deg, rgba(30,22,12,0.6) 0%, transparent 100%);
+  }
+
+  .nav-device--grimoire .nav-device-panel {
+    width: 95vw;
+    max-height: 90vh;
+  }
+
+  .grimoire-close-btn {
+    top: -12px;
+    right: -6px;
+  }
+
+  .grimoire-mascot {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* ── Audio Control Overlay Widget (Top Right) ── */
+.audio-widget-container {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 250;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: var(--surface);
+  border: 1px solid var(--glass-border);
+  border-radius: 99px;
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(10px);
+}
+
+.audio-btn {
+  font-size: 1.1rem;
+  color: var(--text);
+  cursor: pointer;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.audio-btn:hover {
+  transform: scale(1.15);
+}
+
+.audio-slider {
+  width: 70px;
+  height: 4px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+/* Pokédex D-Pad & Camera Lens details */
+.pokedex-dpad {
+  display: inline-grid;
+  grid-template-columns: repeat(3, 10px);
+  grid-template-rows: repeat(3, 10px);
+  gap: 1px;
+  margin-right: 8px;
+}
+.dpad-center { background: #222; grid-area: 2 / 2; }
+.dpad-up { background: #333; grid-area: 1 / 2; border-radius: 2px 2px 0 0; }
+.dpad-down { background: #333; grid-area: 3 / 2; border-radius: 0 0 2px 2px; }
+.dpad-left { background: #333; grid-area: 2 / 1; border-radius: 2px 0 0 2px; }
+.dpad-right { background: #333; grid-area: 2 / 3; border-radius: 0 2px 2px 0; }
+

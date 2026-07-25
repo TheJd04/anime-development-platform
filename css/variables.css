@@ -261,38 +261,7 @@
   --rank-max: #E040FB;
 }
 
-/* ──────────────────────────────────────────────
-   8. WAND AND SWORD — Royal Navy / Luminous Gold / Mystic Cyan & Spell Violet
-   ────────────────────────────────────────────── */
-[data-theme="wandandsword"] {
-  --primary: #00E5FF;
-  --primary-light: #80D8FF;
-  --primary-dark: #0097A7;
-  --secondary: #FFD700;
-  --secondary-light: #FFE57F;
-  --accent: #E040FB;
-  --accent-alt: #7C4DFF;
-  --bg: #060914;
-  --bg-secondary: #0D1226;
-  --surface: #141C38;
-  --surface-light: #1E2A52;
-  --text: #F0F4FF;
-  --text-muted: #8AA0D0;
-  --text-dim: #556690;
-  --glow: rgba(0,229,255,0.6);
-  --glow-secondary: rgba(255,215,0,0.5);
-  --gradient-hero: linear-gradient(135deg, #00E5FF 0%, #7C4DFF 50%, #FFD700 100%);
-  --gradient-card: linear-gradient(160deg, rgba(0,229,255,0.15) 0%, rgba(124,77,255,0.08) 100%);
-  --gradient-rank: linear-gradient(90deg, #00E5FF, #FFD700);
 
-  --rank-1: #80D8FF;
-  --rank-2: #4DD0E1;
-  --rank-3: #7C4DFF;
-  --rank-4: #BA68C8;
-  --rank-5: #FFD54F;
-  --rank-6: #00E5FF;
-  --rank-max: #FFD700;
-}
 
 /* ──────────────────────────────────────────────
    9. BLACK CLOVER — Deep Black / Crimson Red / Gold / Dark Green

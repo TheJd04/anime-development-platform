@@ -42,42 +42,7 @@ const CursorPet = {
         </div>
       `,
     },
-  },
 
-  // Pokémon Theme PokéFollowers Catalogue (Unlocked with Gym Badges & Trophies)
-  pokemonFollowers: [
-    { id: 'mew',        name: 'Mew (Legendary)', icon: '🌟', aura: 'pink', badge: 'Mythic',      reqXp: 0,    unlocked: true, image: 'assets/images/followers/pk_mew.png' },
-    { id: 'pikachu',    name: 'Pikachu',         icon: '⚡', aura: 'yellow', badge: 'Starter',     reqXp: 0,    unlocked: true },
-    { id: 'eevee',      name: 'Eevee',           icon: '🦊', aura: 'orange', badge: 'Boulder Badge', reqXp: 200, unlocked: true },
-    { id: 'charmander', name: 'Charmander',      icon: '🔥', aura: 'orange', badge: 'Cascade Badge', reqXp: 500, unlocked: false },
-    { id: 'squirtle',   name: 'Squirtle',        icon: '💧', aura: 'cyan',   badge: 'Thunder Badge', reqXp: 1000, unlocked: false },
-    { id: 'bulbasaur',  name: 'Bulbasaur',       icon: '🍃', aura: 'green',  badge: 'Rainbow Badge', reqXp: 1500, unlocked: false },
-    { id: 'gengar',     name: 'Gengar',          icon: '👻', aura: 'purple', badge: 'Soul Badge',    reqXp: 2500, unlocked: false },
-    { id: 'lucario',    name: 'Lucario',         icon: '⚔️', aura: 'cyan',   badge: 'Marsh Badge',   reqXp: 4000, unlocked: false },
-    { id: 'mewtwo',     name: 'Mewtwo',          icon: '🔮', aura: 'purple', badge: 'Volcano Badge', reqXp: 6000, unlocked: false },
-    { id: 'rayquaza',   name: 'Rayquaza',        icon: '🐉', aura: 'gold',   badge: 'Earth Badge',   reqXp: 9000, unlocked: false },
-  ],
-
-  activePokemonFollower: 'mew',
-
-  // Dragon Ball Followers Catalogue (Korin, Baba, Kid Goku Nimbus, Shenron)
-  dragonballFollowers: [
-    { id: 'goku_nimbus', name: 'Goku Flying Nimbus', icon: '☁️', aura: 'gold', reqXp: 0, unlocked: true, image: 'assets/images/followers/db_goku_nimbus.png' },
-    { id: 'korin',       name: 'Master Korin Cat',    icon: '🐱', aura: 'yellow', reqXp: 200, unlocked: true, image: 'assets/images/followers/db_korin.png' },
-    { id: 'baba',        name: 'Fortuneteller Baba',  icon: '🔮', aura: 'purple', reqXp: 500, unlocked: false, image: 'assets/images/followers/db_baba.png' },
-  ],
-
-  activeDbFollower: 'goku_nimbus',
-
-  setPokemonFollower(followerId) {
-    this.activePokemonFollower = followerId;
-    this.updateTheme();
-  },
-
-  setDbFollower(followerId) {
-    this.activeDbFollower = followerId;
-    this.updateTheme();
-  },
 
   naruto: {
       name: 'Pakkun (Ninja Pug)',
@@ -152,18 +117,6 @@ const CursorPet = {
         </div>
       `,
     },
-    wandandsword: {
-      name: 'Spell Cat',
-      icon: '🪄',
-      color: '#00E5FF',
-      trail: '✨',
-      avatarHtml: `
-        <div class="pet-sprite pet-magiccat">
-          <span class="pet-emoji">🐱</span>
-          <span class="pet-aura magic"></span>
-        </div>
-      `,
-    },
     onepiece: {
       name: 'Tony Tony Chopper',
       icon: '🦌',
@@ -176,6 +129,43 @@ const CursorPet = {
         </div>
       `,
     },
+
+  },
+
+// Pokémon Theme PokéFollowers Catalogue (Unlocked with Gym Badges & Trophies)
+
+  pokemonFollowers: [
+    { id: 'mew',        name: 'Mew (Legendary)', icon: '🌟', aura: 'pink', badge: 'Mythic',      reqXp: 0,    unlocked: true, image: 'assets/images/followers/pk_mew.png' },
+    { id: 'pikachu',    name: 'Pikachu',         icon: '⚡', aura: 'yellow', badge: 'Starter',     reqXp: 0,    unlocked: true },
+    { id: 'eevee',      name: 'Eevee',           icon: '🦊', aura: 'orange', badge: 'Boulder Badge', reqXp: 200, unlocked: true },
+    { id: 'charmander', name: 'Charmander',      icon: '🔥', aura: 'orange', badge: 'Cascade Badge', reqXp: 500, unlocked: false },
+    { id: 'squirtle',   name: 'Squirtle',        icon: '💧', aura: 'cyan',   badge: 'Thunder Badge', reqXp: 1000, unlocked: false },
+    { id: 'bulbasaur',  name: 'Bulbasaur',       icon: '🍃', aura: 'green',  badge: 'Rainbow Badge', reqXp: 1500, unlocked: false },
+    { id: 'gengar',     name: 'Gengar',          icon: '👻', aura: 'purple', badge: 'Soul Badge',    reqXp: 2500, unlocked: false },
+    { id: 'lucario',    name: 'Lucario',         icon: '⚔️', aura: 'cyan',   badge: 'Marsh Badge',   reqXp: 4000, unlocked: false },
+    { id: 'mewtwo',     name: 'Mewtwo',          icon: '🔮', aura: 'purple', badge: 'Volcano Badge', reqXp: 6000, unlocked: false },
+    { id: 'rayquaza',   name: 'Rayquaza',        icon: '🐉', aura: 'gold',   badge: 'Earth Badge',   reqXp: 9000, unlocked: false },
+  ],
+
+  activePokemonFollower: 'mew',
+
+  // Dragon Ball Followers Catalogue (Korin, Baba, Kid Goku Nimbus, Shenron)
+  dragonballFollowers: [
+    { id: 'goku_nimbus', name: 'Goku Flying Nimbus', icon: '☁️', aura: 'gold', reqXp: 0, unlocked: true, image: 'assets/images/followers/db_goku_nimbus.png' },
+    { id: 'korin',       name: 'Master Korin Cat',    icon: '🐱', aura: 'yellow', reqXp: 200, unlocked: true, image: 'assets/images/followers/db_korin.png' },
+    { id: 'baba',        name: 'Fortuneteller Baba',  icon: '🔮', aura: 'purple', reqXp: 500, unlocked: false, image: 'assets/images/followers/db_baba.png' },
+  ],
+
+  activeDbFollower: 'goku_nimbus',
+
+  setPokemonFollower(followerId) {
+    this.activePokemonFollower = followerId;
+    this.updateTheme();
+  },
+
+  setDbFollower(followerId) {
+    this.activeDbFollower = followerId;
+    this.updateTheme();
   },
 
   init() {

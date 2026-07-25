@@ -367,10 +367,21 @@ const NavDevice = {
 
           <!-- RIGHT PANEL -->
           <div class="pokedex-right">
-            <!-- Info Screen -->
+            <!-- Info Screen & PokéFollower Selector -->
             <div class="pokedex-info-screen">
-              <div class="pokedex-info-title">POKÉDEX NAV SYSTEM V2.0</div>
-              <div class="pokedex-info-text">Select a destination module to initiate fast travel across regions.</div>
+              <div class="pokedex-info-title">POKÉDEX NAV & PokéFollowers</div>
+              <div class="pokedex-follower-bar" style="display: flex; gap: 6px; overflow-x: auto; padding: 4px 0; margin-top: 4px;">
+                ${CursorPet.pokemonFollowers.map(p => `
+                  <button class="pokedex-follower-chip ${CursorPet.activePokemonFollower === p.id ? 'active' : ''} ${data.profile.xp < p.reqXp ? 'locked' : ''}"
+                          onclick="CursorPet.setPokemonFollower('${p.id}'); NavDevice.render();"
+                          title="${p.name} (${p.badge} · Req ${p.reqXp} XP)"
+                          style="background: rgba(0,0,0,0.6); border: 1.5px solid ${CursorPet.activePokemonFollower === p.id ? '#FFD600' : 'rgba(0,229,255,0.3)'}; color: #FFF; border-radius: 6px; padding: 2px 6px; font-size: 0.7rem; cursor: pointer; display: flex; align-items: center; gap: 3px; white-space: nowrap;">
+                    <span>${p.icon}</span>
+                    <span>${p.name}</span>
+                    ${data.profile.xp < p.reqXp ? '🔒' : ''}
+                  </button>
+                `).join('')}
+              </div>
             </div>
 
             <!-- Navigation Grid -->

@@ -298,13 +298,13 @@
    (Pokémon theme)
    ═══════════════════════════════════════════ */
 
-/* --- Pokédex Trigger: Top-Left Pokéball-styled --- */
+/* --- Pokédex Trigger: Bottom-Center Pokéball-styled --- */
 .nav-device--pokedex .nav-device-trigger {
-  position: relative;
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
   top: auto;
-  left: auto;
-  bottom: auto;
-  transform: none;
   width: 56px;
   height: 56px;
   border-radius: 50%;
@@ -313,7 +313,6 @@
   box-shadow: 0 4px 20px rgba(229,57,53,0.5), 0 0 30px rgba(229,57,53,0.2);
   z-index: 260;
   overflow: hidden;
-  animation: float 3s ease-in-out infinite;
   cursor: pointer;
 }
 
@@ -348,7 +347,7 @@
 }
 
 .nav-device--pokedex .nav-device-trigger:hover {
-  transform: scale(1.12);
+  transform: translateX(-50%) scale(1.12);
   box-shadow: 0 6px 30px rgba(229,57,53,0.6), 0 0 50px rgba(229,57,53,0.3);
 }
 

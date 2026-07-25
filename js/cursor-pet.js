@@ -38,12 +38,34 @@ const CursorPet = {
       avatarHtml: `
         <div class="pet-sprite pet-pikachu">
           <span class="pet-emoji">⚡</span>
-          <span class="pet-body-text">⚡</span>
           <span class="pet-aura yellow"></span>
         </div>
       `,
     },
-    naruto: {
+  },
+
+  // Pokémon Theme PokéFollowers Catalogue (Unlocked with Gym Badges & Trophies)
+  pokemonFollowers: [
+    { id: 'pikachu',    name: 'Pikachu',    icon: '⚡', aura: 'yellow', badge: 'Starter',      reqXp: 0,    unlocked: true },
+    { id: 'eevee',      name: 'Eevee',      icon: '🦊', aura: 'orange', badge: 'Boulder Badge', reqXp: 200,  unlocked: true },
+    { id: 'charmander', name: 'Charmander', icon: '🔥', aura: 'orange', badge: 'Cascade Badge', reqXp: 500,  unlocked: false },
+    { id: 'squirtle',   name: 'Squirtle',   icon: '💧', aura: 'cyan',   badge: 'Thunder Badge', reqXp: 1000, unlocked: false },
+    { id: 'bulbasaur',  name: 'Bulbasaur',  icon: '🍃', aura: 'green',  badge: 'Rainbow Badge', reqXp: 1500, unlocked: false },
+    { id: 'gengar',     name: 'Gengar',     icon: '👻', aura: 'purple', badge: 'Soul Badge',    reqXp: 2500, unlocked: false },
+    { id: 'lucario',    name: 'Lucario',    icon: '⚔️', aura: 'cyan',   badge: 'Marsh Badge',   reqXp: 4000, unlocked: false },
+    { id: 'mewtwo',     name: 'Mewtwo',     icon: '🔮', aura: 'purple', badge: 'Volcano Badge', reqXp: 6000, unlocked: false },
+    { id: 'rayquaza',   name: 'Rayquaza',   icon: '🐉', aura: 'gold',   badge: 'Earth Badge',   reqXp: 9000, unlocked: false },
+    { id: 'arceus',     name: 'Arceus',     icon: '👑', aura: 'gold',   badge: 'League Trophy', reqXp: 15000, unlocked: false },
+  ],
+
+  activePokemonFollower: 'pikachu',
+
+  setPokemonFollower(followerId) {
+    this.activePokemonFollower = followerId;
+    this.updateTheme();
+  },
+
+  naruto: {
       name: 'Pakkun (Ninja Pug)',
       icon: '🐶',
       color: '#FF9800',
@@ -164,7 +186,22 @@ const CursorPet = {
     if (!this.container) return;
     const data = Storage.load();
     const themeId = data.theme || 'blackclover';
-    const petConfig = this.mascots[themeId] || this.mascots.blackclover;
+    let petConfig = this.mascots[themeId] || this.mascots.blackclover;
+
+    if (themeId === 'pokemon') {
+      const activePk = this.pokemonFollowers.find(p => p.id === this.activePokemonFollower) || this.pokemonFollowers[0];
+      petConfig = {
+        name: activePk.name,
+        icon: activePk.icon,
+        trail: activePk.icon,
+        avatarHtml: `
+          <div class="pet-sprite pet-pokemon">
+            <span class="pet-emoji">${activePk.icon}</span>
+            <span class="pet-aura ${activePk.aura}"></span>
+          </div>
+        `,
+      };
+    }
 
     this.container.innerHTML = `
       <div class="cursor-pet-inner" id="cursor-pet-inner">
